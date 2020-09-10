@@ -16,6 +16,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "author": "const TeamName",
+  "license": "ISC",
   "eslintConfig": {
     "extends": "react-app"
   },
