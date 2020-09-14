@@ -1,28 +1,26 @@
 import React, {useState} from "react";
 import {Container, Col, Row, Form, Button, FormGroup, Input, Label, Modal, ModalBody, ModalHeader, ModalFooter} from "reactstrap";
 
-const Login = () => {
-
+const Register = () => {
 
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
 
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const logIn = (event) => {
+    const register = (event) => {
         event.preventDefault();
 
     };
 
     return (
         <div>
-        <Button color="secondary" onClick={toggle}>Log In</Button>
+        <Button color="secondary" onClick={toggle}>Register</Button>
         <Modal isOpen={modal} toggle={toggle} >
-        <ModalHeader toggle={toggle}>Log In</ModalHeader>
+        <ModalHeader toggle={toggle}>Register</ModalHeader>
         <ModalBody>
-        <Form onSubmit={logIn}>
+        <Form onSubmit={register}>
             <FormGroup>
                 <Label for="txtEmail">Email Address</Label>
                 <Input type="text" id="txtEmail" placeholder="Email Address" value={email} onChange={(e) => {/*console.log(e.target.value); */setEmail(e.target.value);}} />
@@ -34,11 +32,11 @@ const Login = () => {
         </Form>
         </ModalBody>
         <ModalFooter>
-            <Button type="submit" color="primary" onClick={toggle}>Log In</Button>
+            <Button type="submit" color="primary" onClick={toggle}>Register</Button>
         </ModalFooter>
         </Modal>
         </div>
     );
 };
 
-export default Login;
+export default Register;
