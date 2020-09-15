@@ -60,7 +60,7 @@ const Register = (props) => {
             body: JSON.stringify({user: userObject})
         })
         .then(res => res.json()) // {console.log("Register.js response", res); res.json();}
-        .then(json => props.updateToken(json.sessionToken)) // {props.setSessionToken(json.sessionToken); console.log("Register.js USER:", json); console.log("Register.js json.sessionToken", json.sessionToken);})
+        .then(json => props.updateToken(json.sessionToken)) // {props.setSessionToken(json.sessionToken); console.log("Register.js USER", json); console.log("Register.js json.sessionToken", json.sessionToken);})
         .catch(err => console.log(err))
 
         toggle();

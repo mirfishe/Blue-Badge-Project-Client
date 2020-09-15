@@ -62,7 +62,7 @@ const Login = (props) => {
                 body: JSON.stringify({user: userObject})
             })
             .then(res => res.json()) // {console.log("Login.js response", res); res.json();}
-            .then(json => props.updateToken(json.sessionToken)) // console.log("Login.js USER:", json); console.log("Login.js json.sessionToken)", json.sessionToken);})
+            .then(json => props.updateToken(json.sessionToken)) // console.log("Login.js USER", json); console.log("Login.js json.sessionToken)", json.sessionToken);})
             // .then(toggle())
             .catch(err => console.log(err))
 

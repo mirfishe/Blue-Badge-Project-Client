@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import {Container, Col, Row, Nav, NavbarBrand, NavbarText} from "reactstrap";
-import Header from "./components/site/Header";
+// import Header from "./components/site/Header";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Logout from "./components/auth/Logout";
@@ -42,29 +42,12 @@ function App() {
     console.log("User logged out.");
   };
 
-  // Didn't work to re-render the Header.
-  // useEffect(() => {
-  //   displayHeader();
-  // }, [sessionToken]);
-
-  // Didn't work to re-render the Header.
-  // const displayHeader = () => {
-  //   return (
-  //     <Row>
-  //     <Header baseURL={baseURL} sessionToken={sessionToken} updateToken={updateToken} clearToken={clearToken} />
-  //   </Row>
-  //   )};
-
   return (
     <Container>
-      {/* displayHeader() */ /* Didn't work to re-render the Header. */}
       <Row>
       {/* <Header baseURL={baseURL} sessionToken={sessionToken} updateToken={updateToken} clearToken={clearToken} /> */}
         <Nav>
             <NavbarBrand>Logo</NavbarBrand>
-            {/* {sessionToken !== localStorage.getItem("token") ? <Login baseURL={baseURL} updateToken={updateToken} /> : ""}
-            {sessionToken !== localStorage.getItem("token") ? <Register baseURL={baseURL} updateToken={updateToken} /> : ""}
-            {sessionToken === localStorage.getItem("token") && sessionToken !== undefined ? <Logout clearToken={clearToken} /> : ""} */}
             {localStorage.getItem("token") === null || localStorage.getItem("token") === undefined  ? <Login baseURL={baseURL} updateToken={updateToken} />  : ""}
             {localStorage.getItem("token") === null || localStorage.getItem("token") === undefined  ? <Register baseURL={baseURL} updateToken={updateToken} /> : ""}
             {localStorage.getItem("token") !== null && localStorage.getItem("token") !== undefined  ? <Logout clearToken={clearToken} />  : ""}
