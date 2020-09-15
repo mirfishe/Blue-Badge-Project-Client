@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import {Container, Col, Row, NavbarText} from "reactstrap";
+import {Container, Col, Row, Button} from "reactstrap";
 
 const Logout = (props) => {
 
     return (
-        <NavbarText>
-            Log Out
-        </NavbarText>
+        <div>
+            <Button color="info" size="sm" onClick={() => props.setSessionToken(undefined)}>Log Out</Button>
+        </div>
     );
 };
 

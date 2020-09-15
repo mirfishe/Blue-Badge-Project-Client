@@ -13,7 +13,7 @@ const Search = (props) => {
     };
 
     useEffect(() => {
-        console.log(results);
+        // console.log(results);
     }, [results]);
 
     return (
