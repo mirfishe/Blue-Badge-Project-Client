@@ -45,10 +45,10 @@ function App() {
         <Header baseURL={baseURL} sessionToken={sessionToken} updateToken={updateToken} clearToken={clearToken} />
       </Row>
       <Row className="mp-3">
-      <Col xs="4">
+      <Col md="6">
       <Search baseURL={baseURL} sessionToken={sessionToken} />
       </Col>
-      <Col xs="4">
+      <Col md="6">
       <List baseURL={baseURL} sessionToken={sessionToken} />
       </Col>
       </Row>
