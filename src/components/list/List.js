@@ -3,18 +3,25 @@ import {Container, Col, Row, Nav, NavItem, NavLink, TabContent, TabPane} from "r
 import "./List.css";
 import classnames from "classnames";
 import ListItems from "./ListItems";
+import CreateList from "./CreateList";
 
 const List = (props) => {
 
     const [activeTab, setActiveTab] = useState("1");
+    const [addList, setAddList] = useState(false);
 
     const toggle = tab => {
       if(activeTab !== tab) setActiveTab(tab);
     };
 
+    const addOn = () => {
+        setAddList(true);
+    }
+
     useEffect(() => {
         console.log("List.js props.sessionToken", props.sessionToken);
     }, [props.sessionToken]);
+    
 
     return (
         <div>
@@ -24,11 +31,9 @@ const List = (props) => {
                     My List
                 </NavLink>
             </NavItem>
-        </Nav>
-        <Nav tabs>
             <NavItem>
-            <NavLink className={classnames({ active: activeTab === "2" })} onClick={() => { toggle("2"); }}>
-                    My List
+            <NavLink className={classnames({ active: activeTab === "2" })} onClick={() => { toggle("2"); addOn(); }}>
+                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL}/>: "Add List"}
                 </NavLink>
             </NavItem>
         </Nav>
@@ -37,7 +42,7 @@ const List = (props) => {
         <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} />
         </TabPane>
         <TabPane tabId="2">
-        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} />
+        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} baseURL={props.baseURL}/>
         </TabPane>
       </TabContent>
         </div>
