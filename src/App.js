@@ -6,11 +6,12 @@ import Header from "./components/site/Header";
 import Footer from "./components/site/Footer";
 import Search from "./components/search/Search";
 import List from "./components/list/List";
-
+import API_URL from "./helpers/environment"
 
 function App() {
 
-  const baseURL = "https://tw-blue-badge-server.herokuapp.com/";
+  // const baseURL = "https://tw-blue-badge-server.herokuapp.com/";
+  const baseURL = API_URL + "/";
 
   const [sessionToken, setSessionToken] = useState(undefined);
 
