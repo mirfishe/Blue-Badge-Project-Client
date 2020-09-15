@@ -4,11 +4,17 @@ import "./List.css";
 import classnames from "classnames";
 import ListItems from "./ListItems";
 import CreateList from "./CreateList";
+import EditList from "./EditList";
+import DeleteList from "./DeleteList";
 
 const List = (props) => {
 
     const [activeTab, setActiveTab] = useState("1");
     const [addList, setAddList] = useState(false);
+    const [editList, setEditList] = useState(false);
+    const [deleteList, setDeleteList] = useState(false)
+    const [listToEdit, setListToEdit] = useState({})
+    const [listToDelete, setListToDelete] = useState({})
 
     const toggle = tab => {
       if(activeTab !== tab) setActiveTab(tab);
@@ -16,6 +22,22 @@ const List = (props) => {
 
     const addOn = () => {
         setAddList(true);
+    }
+
+    const editOn = () => {
+        setEditList(true);
+    }
+
+    const deleteOn = () => {
+        setDeleteList(true);
+    }
+
+    const updateListToEdit = (list) => {
+        setListToEdit(list);
+    }
+
+    const updateListToDelete = (list) => {
+        setListToDelete(list);
     }
 
     useEffect(() => {
