@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Container, Col, Row, Form, Button, FormGroup, Input, Label, Modal, ModalBody, ModalHeader, ModalFooter} from "reactstrap";
 
-const Login = () => {
+const Login = (props) => {
 
 
     const [modal, setModal] = useState(false);

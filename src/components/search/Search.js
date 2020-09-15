@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {Container, Col, Row, Form, FormGroup, Button, Input} from "reactstrap";
 import Results from "./Results";
 
-const Search = () => {
+const Search = (props) => {
 
     const [searchTerms, setSearchTerms] = useState('');
     const [results, setResults] = useState([]);

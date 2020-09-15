@@ -5,14 +5,14 @@ import Login from "../auth/Login";
 import Register from "../auth/Register";
 import Logout from "../auth/Logout";
 
-const Header  = () => {
+const Header  = (props) => {
 
     return (
             <Nav xs="12">
                 <NavbarBrand xs="2">Logo</NavbarBrand>
-                <Login />
-                <Register />
-                <Logout />
+                <Login baseURL={props.baseURL} />
+                <Register baseURL={props.baseURL} />
+                <Logout baseURL={props.baseURL} />
             </Nav>
     );
 };
