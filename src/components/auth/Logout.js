@@ -4,8 +4,8 @@ import {Container, Col, Row, Button} from "reactstrap";
 const Logout = (props) => {
 
     return (
-        <div>
-            <Button color="info" size="sm" onClick={() => props.setSessionToken(undefined)}>Log Out</Button>
+        <div className="m-2">
+        {props.sessionToken !== undefined ? <Button color="info" size="sm" onClick={() => props.setSessionToken(undefined)}>Log Out</Button> : ''}
         </div>
     );
 };

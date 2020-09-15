@@ -9,8 +9,23 @@ const Register = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const [errEmail, setErrEmail] = useState('');
+    const [errPassword, setErrPassword] = useState('');
+
     const register = (event) => {
         event.preventDefault();
+
+        if (email.length > 0) {
+
+        } else {
+            setErrEmail('Email is required.');
+        };
+
+        if (password.length > 0) {
+
+        } else {
+            setErrPassword('Password is required.');
+        };
 
         let userObject = {
             email:  email,
@@ -39,7 +54,7 @@ const Register = (props) => {
     };
 
     return (
-        <div>
+        <div className="m-2">
         <Button color="secondary" size="sm" onClick={toggle}>Register</Button>
         <Modal isOpen={modal} toggle={toggle} >
         <ModalHeader>Register</ModalHeader>
@@ -48,10 +63,12 @@ const Register = (props) => {
             <FormGroup>
                 <Label for="txtEmail">Email Address</Label>
                 <Input type="text" id="txtEmail" placeholder="Email Address" value={email} onChange={(e) => {/*console.log(e.target.value); */setEmail(e.target.value);}} />
+                {errEmail} 
             </FormGroup>
             <FormGroup>
                 <Label for="txtPassword">Password</Label>
                 <Input type="password" id="password" placeholder="Password" value={password} onChange={(e) => {/*console.log(e.target.value); */setPassword(e.target.value);}} />
+                {errPassword}
             </FormGroup>
         </Form>
         </ModalBody>

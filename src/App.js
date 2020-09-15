@@ -17,7 +17,8 @@ const baseURL = "https://tw-blue-badge-server.herokuapp.com/";
   return (
     <Container>
       <Row>
-        <Header baseURL={baseURL} setSessionToken={setSessionToken} />
+        <Header baseURL={baseURL} sessionToken={sessionToken} setSessionToken={setSessionToken} />
+        sessionToken={sessionToken} 
       </Row>
       <Row className="mp-3">
       <Col xs="4">
