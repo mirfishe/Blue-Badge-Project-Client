@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import {Container, Col, Row} from "reactstrap";
@@ -10,14 +10,38 @@ import List from "./components/list/List";
 
 function App() {
 
-const [sessionToken, setSessionToken] = useState(undefined);
+  const baseURL = "https://tw-blue-badge-server.herokuapp.com/";
 
-const baseURL = "https://tw-blue-badge-server.herokuapp.com/";
+  const [sessionToken, setSessionToken] = useState(undefined);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setSessionToken(localStorage.getItem("token"));
+      console.log("App.js localStorage token", localStorage.getItem("token"));
+      // console.log("sessionToken", sessionToken); // Never shows the current value of sessionToken
+    };
+  }, []);
+
+  const updateToken = (newToken) => {
+    localStorage.setItem("token", newToken);
+    setSessionToken(newToken);
+    console.log("App.js newToken", newToken);
+    // console.log("sessionToken", sessionToken); // Never shows the current value of sessionToken
+    console.log("User logged in.");
+  };
+
+  const clearToken = () => {
+    localStorage.clear();
+    setSessionToken("");
+    console.log("App.js localStorage token", localStorage.getItem("token"));
+    // console.log("sessionToken", sessionToken); // Never shows the current value of sessionToken
+    console.log("User logged out.");
+  };
 
   return (
     <Container>
       <Row>
-        <Header baseURL={baseURL} setSessionToken={setSessionToken} />
+        <Header baseURL={baseURL} sessionToken={sessionToken} updateToken={updateToken} clearToken={clearToken} />
       </Row>
       <Row className="mp-3">
       <Col xs="4">
