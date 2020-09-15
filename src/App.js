@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+import "bootstrap/dist/css/bootstrap.css";
+import "./App.css";
+import {Container, Col, Row} from "reactstrap";
+import Header from "./components/site/Header";
+import Footer from "./components/site/Footer";
+import Search from "./components/search/Search";
+import List from "./components/list/List";
+
 
 function App() {
+
+const [sessionToken, setSessionToken] = useState(undefined);
+
+const baseURL = "https://tw-blue-badge-server.herokuapp.com/";
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Row>
+        <Header baseURL={baseURL} setSessionToken={setSessionToken} />
+      </Row>
+      <Row className="mp-3">
+      <Col xs="4">
+      <Search baseURL={baseURL} sessionToken={sessionToken} />
+      </Col>
+      <Col xs="4">
+      <List baseURL={baseURL} sessionToken={sessionToken} />
+      </Col>
+      </Row>
+      <Row>
+      <Footer />
+      </Row>
+    </Container>
   );
 }
 
