@@ -49,10 +49,10 @@ const Login = (props) => {
                 email:  email.trim(),
                 password:  password.trim()
             };
-            // console.log(userObject);
+            // console.log("Login.js userObject", userObject);
 
             let URL = props.baseURL + "user/login";
-            // console.log(URL);
+            // console.log("Login.js URL", URL);
 
             fetch(URL, {
                 method: "POST",
@@ -61,8 +61,8 @@ const Login = (props) => {
                 }),
                 body: JSON.stringify({user: userObject})
             })
-            .then(res => res.json()) // {console.log(res); res.json();}
-            .then(json => props.updateToken(json.sessionToken))// console.log("USER:", json); console.log(json.sessionToken);})
+            .then(res => res.json()) // {console.log("Login.js response", res); res.json();}
+            .then(json => props.updateToken(json.sessionToken)) // console.log("Login.js USER:", json); console.log("Login.js json.sessionToken)", json.sessionToken);})
             // .then(toggle())
             .catch(err => console.log(err))
 

@@ -47,10 +47,10 @@ const Register = (props) => {
             email:  email.trim(),
             password:  password.trim()
         };
-        // console.log(userObject);
+        // console.log("Register.js userObject", userObject);
 
         let URL = props.baseURL + "user/register";
-        // console.log(URL);
+            // console.log("Register.js URL", URL);
 
         fetch(URL, {
             method: "POST",
@@ -59,8 +59,8 @@ const Register = (props) => {
             }),
             body: JSON.stringify({user: userObject})
         })
-        .then(res => res.json()) // {console.log(res); res.json();}
-        .then(json => props.updateToken(json.sessionToken))// {props.setSessionToken(json.sessionToken); console.log("USER:", json); console.log(json.sessionToken);})
+        .then(res => res.json()) // {console.log("Register.js response", res); res.json();}
+        .then(json => props.updateToken(json.sessionToken)) // {props.setSessionToken(json.sessionToken); console.log("Register.js USER:", json); console.log("Register.js json.sessionToken", json.sessionToken);})
         .catch(err => console.log(err))
 
         toggle();
