@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Container, Col, Row, Button} from 'reactstrap';
+import {Container, Col, Row, Button, Card, CardBody, CardText, CardTitle} from 'reactstrap';
 import "./Results.css";
 
 const Results = (props) => {
@@ -14,16 +14,16 @@ const Results = (props) => {
     };
 
     return (
-        <Col className="border">
+        <Col>
         {props.game ?
-            <Row id={props.game.id} className="border">
-                <Col className="border m-3">
+            <Card id={props.game.id}>
+                <CardBody>
                 {props.game.cover ? <img src={props.game.cover.url} alt={props.game.name} /> : ""}
-                {props.game ? <Row className="border"><Col className="border m-3"><a href={props.game.url} target="_blank">{props.game.name}</a></Col></Row> : <Row className="border"><Col className="border m-3">{props.game.name}</Col></Row>}
-                {props.game.summary ? <Row className="border"><Col className="border m-3">{props.game.summary}</Col></Row> : ''}
-                <Row className="border m-3"><Col className="border m-3"><Button color="success" onClick={() => {/*console.log("Results.js Button click props.game", props.game); */addListItem(props.game);}}>Add</Button></Col></Row> 
-                </Col>
-            </Row>
+                {props.game ? <CardTitle><a href={props.game.url} target="_blank">{props.game.name}</a></CardTitle> : <CardTitle>{props.game.name}</CardTitle>}
+                {props.game.summary ? <CardText>{props.game.summary}</CardText> : ''}
+                <Button color="success" onClick={() => {/*console.log("Results.js Button click props.game", props.game); */addListItem(props.game);}}>Add</Button>
+                </CardBody>
+            </Card>
         : ""
         }
         </Col>
