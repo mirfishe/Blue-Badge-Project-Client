@@ -19,7 +19,7 @@ const Results = (props) => {
                 <CardBody>
                 {props.game.cover ? <img src={props.game.cover.url} alt={props.game.name} /> : ""}
                 {props.game ? <CardTitle><a href={props.game.url} target="_blank">{props.game.name}</a></CardTitle> : <CardTitle>{props.game.name}</CardTitle>}
-                <Button color="success" onClick={() => {/*console.log("Results.js Button click props.game", props.game); */addListItem(props.game);}}>Add To List</Button>
+                <Button color="success" onClick={() => {/*console.log("Results.js Button click props.game", props.game); */addListItem(props.game);}}>Add</Button>
                 </CardBody>
             </Card>
         : ""
