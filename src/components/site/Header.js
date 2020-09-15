@@ -10,9 +10,9 @@ const Header  = (props) => {
     return (
             <Nav xs="12">
                 <NavbarBrand xs="2">Logo</NavbarBrand>
-                <Login baseURL={props.baseURL} />
-                <Register baseURL={props.baseURL} />
-                <Logout baseURL={props.baseURL} />
+                <Login baseURL={props.baseURL} setSessionToken={props.setSessionToken} />
+                <Register baseURL={props.baseURL} setSessionToken={props.setSessionToken} />
+                <Logout baseURL={props.baseURL} setSessionToken={props.setSessionToken} />
             </Nav>
     );
 };

@@ -12,13 +12,37 @@ const Register = (props) => {
     const register = (event) => {
         event.preventDefault();
 
+        let userObject = {
+            email:  email,
+            password:  password
+        };
+        // console.log(userObject);
+
+        let URL = props.baseURL + "user/register";
+        // console.log(URL);
+
+        fetch(URL, {
+            method: 'POST',
+            headers:    new Headers ({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify({user: userObject})
+        })
+        .then(res => res.json()) // {console.log(res); res.json();}
+        .then(json => props.setSessionToken(json.sessionToken))// {props.setSessionToken(json.sessionToken); console.log('USER:', json); console.log(json.sessionToken);})
+        .catch(err => console.log(err))
+
+        // Since we’re not removing the whitespace from the email field’s value/input, you can put more than one entry into the database with the same email address. (I think.) I was able to enter multiple records with the same email address by entering “email@email.com” and “email@email.com ” unless I’m misunderstanding something. I expected a SequelizeUniqueConstraintError error.
+
+        toggle();
+
     };
 
     return (
         <div>
-        <Button color="secondary" onClick={toggle}>Register</Button>
+        <Button color="secondary" size="sm" onClick={toggle}>Register</Button>
         <Modal isOpen={modal} toggle={toggle} >
-        <ModalHeader toggle={toggle}>Register</ModalHeader>
+        <ModalHeader>Register</ModalHeader>
         <ModalBody>
         <Form onSubmit={register}>
             <FormGroup>
@@ -32,7 +56,8 @@ const Register = (props) => {
         </Form>
         </ModalBody>
         <ModalFooter>
-            <Button type="submit" color="primary" onClick={toggle}>Register</Button>
+            <Button type="submit" color="primary" onClick={register}>Register</Button>
+            <Button type="submit" color="secondary" onClick={toggle}>Cancel</Button>
         </ModalFooter>
         </Modal>
         </div>

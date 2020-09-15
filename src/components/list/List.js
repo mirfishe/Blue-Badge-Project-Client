@@ -29,10 +29,10 @@ const List = (props) => {
         </Nav>
         <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
-        <ListItems baseURL={props.baseURL} />
+        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} />
         </TabPane>
         <TabPane tabId="2">
-        <ListItems baseURL={props.baseURL} />
+        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} />
         </TabPane>
       </TabContent>
         </div>
