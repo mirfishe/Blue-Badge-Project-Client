@@ -20,13 +20,23 @@ const ListItems = (props) => {
         console.log("ListItem.js props.sessionToken", props.sessionToken);
     }, [props.sessionToken]);
 
-    return (
-        <Row>
-            <Col>List Items
-            {/* <Button color="danger" onClick={() => {deleteListItem(listItem)}}>Delete</Button> */}
-            </Col>
-        </Row>
-    );
+    // return props.itemlist.map((itemlist, index) => {
+    // return (
+    //     <Row>
+    //         <Col>List Items
+    //         <tr>
+    //         <td scope="row">{listitem.id}</td>
+    //         <td>{listitem}</td>
+    //         <td>{listitem}</td>
+    //         <td>{listitem}</td>
+    //         <td>{listitem}</td>
+    //         {/* {button to move items?} */}
+    //         {/* <Button color="danger" onClick={() => {deleteListItem(listItem)}}>Delete</Button> */}
+    //         </tr>
+    //         </Col>
+    //     </Row>
+    // );
+    // })
 };
 
 
