@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Container, Col, Row, Form, Button, FormGroup, Input, Label, Modal, ModalBody, ModalHeader, ModalFooter} from "reactstrap";
 
 const Login = (props) => {
@@ -19,6 +19,10 @@ const Login = (props) => {
         setModal(!modal);
     };
 
+    useEffect(() => {
+        console.log("Login.js modal", modal);
+    }, [modal]);
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -26,7 +30,6 @@ const Login = (props) => {
     const [errEmail, setErrEmail] = useState("");
     const [errPassword, setErrPassword] = useState("");
 
-    // If the user sees the login button and then trys to login without any form data, somehow they still get logged in? From localstorage?
     const logIn = (event) => {
         event.preventDefault();
 
@@ -44,7 +47,7 @@ const Login = (props) => {
             setErrPassword("Password is required.");
         };
 
-        // if (formValidated) {
+        if (formValidated) {
             let userObject = {
                 email:  email.trim(),
                 password:  password.trim()
@@ -63,14 +66,16 @@ const Login = (props) => {
             })
             .then(res => res.json()) // {console.log("Login.js response", res); res.json();}
             .then(json => props.updateToken(json.sessionToken)) // console.log("Login.js USER", json); console.log("Login.js json.sessionToken)", json.sessionToken);})
-            // .then(toggle())
+            // .then(
+            //     toggle()
+            //     )
             .catch(err => console.log(err))
 
             // if (props.sessionToken) {
-                toggle();
+                // toggle();
             // };
 
-        // };
+        };
     };
 
 

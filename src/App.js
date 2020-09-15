@@ -31,7 +31,7 @@ function App() {
     setSessionToken(newToken);
     console.log("App.js newToken", newToken);
     // console.log("sessionToken", sessionToken); // Never shows the current value of sessionToken
-    console.log("User logged in.");
+    console.log("User token changed.");
   };
 
   const clearToken = () => {
