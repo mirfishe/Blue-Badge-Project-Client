@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {Container, Col, Row, Form, FormGroup, Button, Input} from "reactstrap";
+import Results from "./Results";
 
 const Search = () => {
 
@@ -27,6 +28,7 @@ const Search = () => {
         </Row>
         <Row>
             {/* {results.length > 0 ? results.map(game => card(game)) : ''} */}
+            <Results />
         </Row>
         </Container>
     );
