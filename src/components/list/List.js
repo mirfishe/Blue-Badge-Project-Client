@@ -3,7 +3,7 @@ import {Container, Col, Row, Nav, NavItem, NavLink, TabContent, TabPane} from "r
 import classnames from 'classnames';
 import ListItems from "./ListItems";
 
-const List = () => {
+const List = (props) => {
 
     const [activeTab, setActiveTab] = useState('1');
 
@@ -29,10 +29,10 @@ const List = () => {
         </Nav>
         <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
-        <ListItems />
+        <ListItems baseURL={props.baseURL} />
         </TabPane>
         <TabPane tabId="2">
-        <ListItems />
+        <ListItems baseURL={props.baseURL} />
         </TabPane>
       </TabContent>
         </div>

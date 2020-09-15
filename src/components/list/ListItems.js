@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Container, Col, Row} from "reactstrap";
 
-const ListItems = () => {
+const ListItems = (props) => {
 
     return (
         <Row>

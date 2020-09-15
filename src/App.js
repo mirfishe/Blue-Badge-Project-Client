@@ -9,17 +9,20 @@ import List from "./components/list/List";
 
 
 function App() {
+
+const baseURL = "https://tw-blue-badge-server.herokuapp.com/";
+
   return (
     <Container>
       <Row>
-        <Header />
+        <Header baseURL={baseURL} />
       </Row>
       <Row m-3>
       <Col xs="4">
-      <Search />
+      <Search baseURL={baseURL} />
       </Col>
       <Col xs="4">
-      <List />
+      <List baseURL={baseURL} />
       </Col>
       </Row>
       <Row>
