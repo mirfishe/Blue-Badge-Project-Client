@@ -1,28 +1,33 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Container, Col, Row, Nav, NavItem, NavLink, TabContent, TabPane} from "reactstrap";
-import classnames from 'classnames';
+import "./List.css";
+import classnames from "classnames";
 import ListItems from "./ListItems";
 
 const List = (props) => {
 
-    const [activeTab, setActiveTab] = useState('1');
+    const [activeTab, setActiveTab] = useState("1");
 
     const toggle = tab => {
       if(activeTab !== tab) setActiveTab(tab);
     };
 
+    useEffect(() => {
+        console.log("List.js props.sessionToken", props.sessionToken);
+    }, [props.sessionToken]);
+
     return (
         <div>
         <Nav tabs>
             <NavItem>
-                <NavLink className={classnames({ active: activeTab === '1' })} onClick={() => { toggle('1'); }}>
+                <NavLink className={classnames({ active: activeTab === "1" })} onClick={() => { toggle("1"); }}>
                     My List
                 </NavLink>
             </NavItem>
         </Nav>
         <Nav tabs>
             <NavItem>
-            <NavLink className={classnames({ active: activeTab === '2' })} onClick={() => { toggle('2'); }}>
+            <NavLink className={classnames({ active: activeTab === "2" })} onClick={() => { toggle("2"); }}>
                     My List
                 </NavLink>
             </NavItem>

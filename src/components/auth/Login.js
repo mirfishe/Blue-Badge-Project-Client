@@ -4,15 +4,29 @@ import {Container, Col, Row, Form, Button, FormGroup, Input, Label, Modal, Modal
 const Login = (props) => {
 
     const [modal, setModal] = useState(false);
-    const toggle = () => setModal(!modal);
+    const toggle = () => {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+        // Causes issues with the fetch?
+        // setEmail("");
+        // setPassword("");
+
+        if (modal) {
+            // Removes the error messages after the fetch if successful or not
+            // setErrEmail("");
+            // setErrPassword("");
+        };
+
+        setModal(!modal);
+    };
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const [formValidated, setFormValidated] = useState(false);
-    const [errEmail, setErrEmail] = useState('');
-    const [errPassword, setErrPassword] = useState('');
+    const [errEmail, setErrEmail] = useState("");
+    const [errPassword, setErrPassword] = useState("");
 
+    // If the user sees the login button and then trys to login without any form data, somehow they still get logged in? From localstorage?
     const logIn = (event) => {
         event.preventDefault();
 
@@ -20,20 +34,20 @@ const Login = (props) => {
             setFormValidated(true);
         } else {
             setFormValidated(false);
-            setErrEmail('Email is required.');
+            setErrEmail("Email is required.");
         };
 
         if (password.length > 0) {
             setFormValidated(true);
         } else {
             setFormValidated(false);
-            setErrPassword('Password is required.');
+            setErrPassword("Password is required.");
         };
 
-        if (formValidated) {
+        // if (formValidated) {
             let userObject = {
-                email:  email,
-                password:  password
+                email:  email.trim(),
+                password:  password.trim()
             };
             // console.log(userObject);
 
@@ -41,30 +55,29 @@ const Login = (props) => {
             // console.log(URL);
 
             fetch(URL, {
-                method: 'POST',
+                method: "POST",
                 headers:    new Headers ({
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 }),
                 body: JSON.stringify({user: userObject})
             })
             .then(res => res.json()) // {console.log(res); res.json();}
-            .then(json => props.setSessionToken(json.sessionToken))// console.log('USER:', json); console.log(json.sessionToken);})
+            .then(json => props.updateToken(json.sessionToken))// console.log("USER:", json); console.log(json.sessionToken);})
+            // .then(toggle())
             .catch(err => console.log(err))
 
-            // Since we’re not removing the whitespace from the email field’s value/input, you can put more than one entry into the database with the same email address. (I think.) I was able to enter multiple records with the same email address by entering “email@email.com” and “email@email.com ” unless I’m misunderstanding something. I expected a SequelizeUniqueConstraintError error.
-
-            if (props.sessionToken) {
+            // if (props.sessionToken) {
                 toggle();
-            };
+            // };
 
-        };
+        // };
     };
 
 
 
     return (
         <div className="m-2">
-        {props.sessionToken === undefined ? <Button color="success" size="sm" onClick={toggle}>Log In</Button> : ''}
+        <Button color="success" size="sm" onClick={toggle}>Log In</Button>
         <Modal isOpen={modal} toggle={toggle} >
         <ModalHeader>Log In</ModalHeader>
         <ModalBody>

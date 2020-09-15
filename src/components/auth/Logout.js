@@ -5,7 +5,7 @@ const Logout = (props) => {
 
     return (
         <div className="m-2">
-        {props.sessionToken !== undefined ? <Button color="info" size="sm" onClick={() => props.setSessionToken(undefined)}>Log Out</Button> : ''}
+            <Button color="info" size="sm" onClick={() => props.clearToken(undefined)}>Log Out</Button>
         </div>
     );
 };
