@@ -49,6 +49,7 @@ const Search = (props) => {
 
     useEffect(() => {
         console.log("Search.js props.sessionToken", props.sessionToken);
+        setResults([]);
     }, [props.sessionToken]);
 
     return (
