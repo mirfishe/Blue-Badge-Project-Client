@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from "react";
 import {Container, Col, Row, Form, FormGroup, Button, Input} from "reactstrap";
+import "./Search.css";
 import Results from "./Results";
 
 const Search = (props) => {
 
-    const [searchTerms, setSearchTerms] = useState('');
+    const [searchTerms, setSearchTerms] = useState("");
     const [results, setResults] = useState([]);
 
     const searchGames = (event) => {
@@ -15,6 +16,10 @@ const Search = (props) => {
     useEffect(() => {
         // console.log(results);
     }, [results]);
+
+    useEffect(() => {
+        console.log("Search.js props.sessionToken", props.sessionToken);
+    }, [props.sessionToken]);
 
     return (
         <Container className="m-3">
@@ -27,7 +32,7 @@ const Search = (props) => {
         </Form>
         </Row>
         <Row>
-            {/* {results.length > 0 ? results.map(game => card(game)) : ''} */}
+            {/* {results.length > 0 ? results.map(game => card(game)) : ""} */}
             <Results />
         </Row>
         </Container>
