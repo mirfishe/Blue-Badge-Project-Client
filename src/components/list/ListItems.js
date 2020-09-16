@@ -3,19 +3,29 @@ import {Container, Col, Row, Button} from "reactstrap";
 import "./ListItems.css";
 
 const ListItems = (props) => {
+    const [listItem, setListItem] = useState([]);
 
-    const deleteListItem = (listItem) => {
-        fetch(`${props.baseURL}list/item/delete/${listItem.id}`,{
-                method: 'DELETE',
-                headers:    new Headers ({
-                    'Content-Type': 'application/json',
-                    "Authorization": props.sessionToken
-                })
-            })
-            .then(res => res.json())
-            // .then(() => ) // re-fetch list items
-            .catch(err => console.log(err))
-    };
+    const getListItems = () => {
+        let url = props.baseURL + "list/2";
+    
+        fetch(url, {
+          method: "GET",
+          headers: new Headers({
+            "Content-Type": "application/json",
+            "Authorization": props.sessionToken,
+          }),
+        })
+          .then((res) => res.json())
+          .then((json) => {
+            console.log("getListItem json", json);
+            setListItem(json);
+          })
+          .catch((err) => console.log(err));
+      };
+
+      useEffect(() => {
+          getListItems()
+      }, [])
 
     useEffect(() => {
         console.log("ListItems.js props.sessionToken", props.sessionToken);
@@ -29,9 +39,11 @@ const ListItems = (props) => {
     return (
         <Row>
             <Col>List Items
+            {getListItems()}
             {/* <Button color="danger" onClick={() => {deleteListItem(listItem)}}>Delete</Button> */}
             </Col>
         </Row>
+        
     );
 };
 
