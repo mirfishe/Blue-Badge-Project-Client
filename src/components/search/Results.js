@@ -9,7 +9,7 @@ const Results = (props) => {
     const addListItem = (game) => {
 
         let URL = props.baseURL + "item/add/" + props.activeList;
-        console.log("Results.js URL", URL);
+        // console.log("Results.js URL", URL);
 
         let listItemObject = {
             itemName: game.name,
@@ -17,7 +17,7 @@ const Results = (props) => {
             imageURL: game.cover.url,
             sortID: 0
         };
-        console.log("Results.js listItemObject", listItemObject);
+        // console.log("Results.js listItemObject", listItemObject);
 
         fetch(URL, {
             method: "POST",
@@ -27,12 +27,12 @@ const Results = (props) => {
             }),
             body: JSON.stringify({item: listItemObject})
         })
-        .then(res => {console.log("Results.js response", res); res.json();}) // {console.log("Search.js response", res); res.json();}
+        .then(res => {
+            // console.log("Results.js response", res);
+            return res.json();
+        })
         // .then(() => ) // re-fetch list items and display in component
         .catch(err => console.log(err))
-
-
-        // .then(() => ) // re-fetch list items and display in component
 
     };
 
