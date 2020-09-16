@@ -9,7 +9,7 @@ const Results = (props) => {
     const addListItem = (game) => {
 
         let URL = props.baseURL + "item/add/" + props.activeList;
-        console.log("Results.js URL", URL);
+        // console.log("Results.js URL", URL);
 
         let listItemObject = {
             itemName: game.name,
@@ -17,7 +17,7 @@ const Results = (props) => {
             imageURL: game.cover.url,
             sortID: 0
         };
-        console.log("Results.js listItemObject", listItemObject);
+        // console.log("Results.js listItemObject", listItemObject);
 
         fetch(URL, {
             method: "POST",
@@ -27,22 +27,22 @@ const Results = (props) => {
             }),
             body: JSON.stringify({item: listItemObject})
         })
-        .then(res => {console.log("Results.js response", res); res.json();}) // {console.log("Search.js response", res); res.json();}
+        .then(res => {
+            // console.log("Results.js response", res);
+            return res.json();
+        })
         // .then(() => ) // re-fetch list items and display in component
         .catch(err => console.log(err))
-
-
-        // .then(() => ) // re-fetch list items and display in component
 
     };
 
     useEffect(() => {
-        console.log("Results.js props.sessionToken", props.sessionToken);
+        // console.log("Results.js props.sessionToken", props.sessionToken);
         // console.log("Results.js localStorage token", localStorage.getItem("token"));
     }, [props.sessionToken]);
 
     useEffect(() => {
-        console.log("Results.js activeList", props.activeList);
+        // console.log("Results.js activeList", props.activeList);
     }, [props.activeList]);
 
     return (
@@ -53,7 +53,7 @@ const Results = (props) => {
                 {props.game.cover ? <img src={props.game.cover.url} alt={props.game.name} /> : ""}
                 {props.game ? <CardTitle><a href={props.game.url} target="_blank">{props.game.name}</a></CardTitle> : <CardTitle>{props.game.name}</CardTitle>}
                 {props.game.summary ? <CardText>{props.game.summary}</CardText> : ''}
-                <Button color="success" onClick={() => {/*console.log("Results.js Button click props.game", props.game); */addListItem(props.game);}}>Add</Button>
+                {props.sessionToken !== null && props.sessionToken !== undefined ? <Button color="success" onClick={() => {/*console.log("Results.js Button click props.game", props.game); */ addListItem(props.game);}}>Add</Button> : ''}
                 </CardBody>
             </Card>
         : ""

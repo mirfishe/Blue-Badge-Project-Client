@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from "react";
 import {Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody} from 'reactstrap';
 
 const DeleteList = (props) => {
@@ -6,12 +6,12 @@ const DeleteList = (props) => {
 
     const deleteOff = () => {
         props.setDeleteList(false);
-    }
+    };
 
     const handleShow = () => {
         setIsOpen(false);
         deleteOff();
-    }
+    };
 
     let url = `props.baseURL/list/delete/${props.listToDelete.id}`;
 
@@ -29,7 +29,12 @@ const DeleteList = (props) => {
             deleteOff();
             console.log(res);
         })
-    }
+    };
+
+    useEffect(() => {
+        console.log("DeleteList.js props.sessionToken", props.sessionToken);
+        // console.log("DeleteList.js localStorage token", localStorage.getItem("token"));
+    }, [props.sessionToken]);
 
     return (
         <Modal isOpen={isOpen}>
