@@ -22,7 +22,7 @@ const CreateList = (props) => {
             })
         })
         .then((res) => {
-            // need to add function to re-GET lists
+            props.getList();
             addOff();
             console.log(res);
         })
