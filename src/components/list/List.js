@@ -68,6 +68,8 @@ const List = (props) => {
         .then((json) => {
           // console.log("getList json", json);
           setLists(json);
+          props.setActiveList(json[0].id);
+          setActiveTab(0);
         })
         .catch((err) => console.log(err));
     } 
