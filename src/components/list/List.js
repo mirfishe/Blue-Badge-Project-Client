@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Container, Col, Row, Nav, NavItem, NavLink, TabContent, TabPane} from "reactstrap";
+import {Container, Col, Row, Nav, NavItem, NavLink, TabContent, TabPane, Button} from "reactstrap";
 import "./List.css";
 import classnames from "classnames";
 import ListItems from "./ListItems";
@@ -10,7 +10,7 @@ import ListID from './ListID'; //Testing purposes
 
 const List = (props) => {
 
-    const [activeTab, setActiveTab] = useState("1");
+    const [activeTab, setActiveTab] = useState(0);
     const [addList, setAddList] = useState(false);
     const [editList, setEditList] = useState(false);
     const [deleteList, setDeleteList] = useState(false)
@@ -18,14 +18,20 @@ const List = (props) => {
     const [listToDelete, setListToDelete] = useState({})
     const [lists, setLists] = useState([]);
 
-    const toggle = (tab, id) => {
+    const toggleTab = (tab) => {
 
       if(activeTab !== tab) {
         setActiveTab(tab);
-        props.setActiveList(id);
       };
 
     };
+
+    const toggleId = (id) => {
+        if(props.activeList !== id) {
+          props.setActiveList(id);
+        };
+  
+      };
 
     const addOn = () => {
         setAddList(true);
@@ -60,7 +66,7 @@ const List = (props) => {
       })
         .then((res) => res.json())
         .then((json) => {
-          console.log("getList json", json);
+          // console.log("getList json", json);
           setLists(json);
         })
         .catch((err) => console.log(err));
@@ -81,30 +87,31 @@ const List = (props) => {
 
     return (
         <div>
-            <Nav>
+            <Nav tabs>
                 {lists.length > 0 ?lists.map((lists, index) => {
                     return(
                     <NavItem key={index}>
-                     <NavLink className={classnames({ active: activeTab === index })} onClick={() => { toggle(index, lists.id); }}>
+                     <NavLink className={classnames({ active: activeTab === index })} index={index} onClick={() => { toggleTab(index); toggleId(lists.id)  }}>
                          {lists.listName}
                      </NavLink>
                     </NavItem>
-                    )}
-                     ) 
-                     : ''}
+                    )}) : ''}
             <NavItem>
             <NavLink onClick={() => { addOn(); }}>
-                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL} getList={getList}/>: "Add List"}
+                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL} getList={getList}/>: <Button color="primary" size="sm">Add List</Button>}
                 </NavLink>
             </NavItem>
         </Nav>
         <TabContent activeTab={activeTab}>
-        <TabPane tabId="1">
+        <TabPane tabId={0}>
             Testing 1
-        <ListItems baseURL={props.baseURL}  sessionToken={props.sessionToken} activeList={props.activeList} />
+        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
         </TabPane>
-        <TabPane tabId="2">
+        <TabPane tabId={1}>
             Testing 2
+        </TabPane>
+        <TabPane tabId={2}>
+            Testing 3
         <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
         </TabPane>
         {/* <ListID baseURL={props.baseURL} sessionToken={props.sessionToken} /> */}
