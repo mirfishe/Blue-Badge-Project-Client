@@ -4,18 +4,7 @@ import "./ListItems.css";
 
 const ListItems = (props) => {
 
-    const deleteListItem = (listItem) => {
-        fetch(`${props.baseURL}list/item/delete/${listItem.id}`,{
-                method: 'DELETE',
-                headers:    new Headers ({
-                    'Content-Type': 'application/json',
-                    "Authorization": props.sessionToken
-                })
-            })
-            .then(res => res.json())
-            // .then(() => ) // re-fetch list items
-            .catch(err => console.log(err))
-    };
+
 
     useEffect(() => {
         console.log("ListItems.js props.sessionToken", props.sessionToken);

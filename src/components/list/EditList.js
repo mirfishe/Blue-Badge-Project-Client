@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from "react";
 import {Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody} from 'reactstrap';
 
 const EditList = (props) => {
@@ -33,6 +33,11 @@ const EditList = (props) => {
         })
     }
 
+    useEffect(() => {
+        console.log("DeleteList.js props.sessionToken", props.sessionToken);
+        // console.log("DeleteList.js localStorage token", localStorage.getItem("token"));
+    }, [props.sessionToken]);
+    
     return (
         <Modal isOpen={isOpen}>
             <ModalHeader>Edit List</ModalHeader>
