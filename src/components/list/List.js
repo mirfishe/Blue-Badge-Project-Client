@@ -6,6 +6,7 @@ import ListItems from "./ListItems";
 import CreateList from "./CreateList";
 import EditList from "./EditList";
 import DeleteList from "./DeleteList";
+import ListID from './ListID'; //Testing purposes
 
 const List = (props) => {
 
@@ -67,8 +68,6 @@ const List = (props) => {
         .then((json) => {
           // console.log("getList json", json);
           setLists(json);
-          props.setActiveList(json[0].id);
-          setActiveTab(0);
         })
         .catch((err) => console.log(err));
     } 
@@ -115,7 +114,9 @@ const List = (props) => {
             Testing 3
         <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
         </TabPane>
+        {/* <ListID baseURL={props.baseURL} sessionToken={props.sessionToken} /> */}
       </TabContent>
+      <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
         </div>
     );
 };
