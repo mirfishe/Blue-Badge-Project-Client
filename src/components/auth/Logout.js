@@ -1,7 +1,11 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Container, Col, Row, Button} from "reactstrap";
 
 const Logout = (props) => {
+
+    useEffect(() => {
+        console.log("Logout.js localStorage token", localStorage.getItem("token"));
+    }, []);
 
     return (
         <div className="m-2">

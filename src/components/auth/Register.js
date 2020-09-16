@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Container, Col, Row, Form, Button, FormGroup, Input, Label, Modal, ModalBody, ModalHeader, ModalFooter} from "reactstrap";
 
 const Register = (props) => {
@@ -19,6 +19,10 @@ const Register = (props) => {
         setModal(!modal);
     };
 
+    useEffect(() => {
+        console.log("Login.js modal", modal);
+    }, [modal]);
+    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -43,29 +47,38 @@ const Register = (props) => {
             setErrPassword("Password is required.");
         };
 
-        let userObject = {
-            email:  email.trim(),
-            password:  password.trim()
+        if (formValidated) {
+
+            let userObject = {
+                email:  email.trim(),
+                password:  password.trim()
+            };
+            // console.log("Register.js userObject", userObject);
+
+            let URL = props.baseURL + "user/register";
+                // console.log("Register.js URL", URL);
+
+            fetch(URL, {
+                method: "POST",
+                headers:    new Headers ({
+                    "Content-Type": "application/json"
+                }),
+                body: JSON.stringify({user: userObject})
+            })
+            .then(res => res.json()) // {console.log("Register.js response", res); res.json();}
+            .then(json => props.updateToken(json.sessionToken)) // {props.setSessionToken(json.sessionToken); console.log("Register.js USER", json); console.log("Register.js json.sessionToken", json.sessionToken);})
+            .catch(err => console.log(err))
+
+            // if (props.sessionToken) {
+                // toggle();
+            // };
+
         };
-        // console.log("Register.js userObject", userObject);
-
-        let URL = props.baseURL + "user/register";
-            // console.log("Register.js URL", URL);
-
-        fetch(URL, {
-            method: "POST",
-            headers:    new Headers ({
-                "Content-Type": "application/json"
-            }),
-            body: JSON.stringify({user: userObject})
-        })
-        .then(res => res.json()) // {console.log("Register.js response", res); res.json();}
-        .then(json => props.updateToken(json.sessionToken)) // {props.setSessionToken(json.sessionToken); console.log("Register.js USER:", json); console.log("Register.js json.sessionToken", json.sessionToken);})
-        .catch(err => console.log(err))
-
-        toggle();
-
     };
+
+    useEffect(() => {
+        console.log("Register.js localStorage token", localStorage.getItem("token"));
+    }, []);
 
     return (
         <div className="m-2">

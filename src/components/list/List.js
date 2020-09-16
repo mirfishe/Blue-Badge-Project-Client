@@ -84,7 +84,7 @@ const List = (props) => {
         <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} />
         </TabPane>
         <TabPane tabId="2">
-        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} baseURL={props.baseURL}/>
+        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} />
         </TabPane>
       </TabContent>
       <GetList baseURL={props.baseURL} sessionToken={props.sessionToken}/>
