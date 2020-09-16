@@ -7,7 +7,8 @@ const ListItems = (props) => {
 
     const getListItems = () => {
         let url = props.baseURL + "list/" + props.activeList;
-      console.log("url log", url)
+        console.log("ListItems.js url", url);
+
         fetch(url, {
           method: "GET",
           headers: new Headers({
@@ -15,7 +16,11 @@ const ListItems = (props) => {
             "Authorization": props.sessionToken,
           }),
         })
-          .then((res) => res.json())
+          .then(res => {
+              
+            console.log("ListItems.js response", res);
+            return res.json();
+          })
           .then((json) => {
             console.log("getListItem json", json);
             setListItems(json);
@@ -46,6 +51,7 @@ const ListItems = (props) => {
 
     useEffect(() => {
         console.log("ListItems.js props.activeList", props.activeList);
+        getListItems();
     }, [props.activeList]);
 
     return (
@@ -57,7 +63,7 @@ const ListItems = (props) => {
         // </Row>
         <Table>
           {/* {itemMapper()} */}
-         {listItems.map((item, index) => {
+         {listItems.length > 0 ? listItems.map((item, index) => {
           return(
             <tr key={index}>
               <td>{item.itemName}</td>
@@ -65,7 +71,7 @@ const ListItems = (props) => {
               <td>{item.imageURL}</td>
             </tr>
           )
-        })}
+        }) : ""}
         </Table>
         
     );
