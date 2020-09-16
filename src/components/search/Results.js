@@ -37,12 +37,12 @@ const Results = (props) => {
     };
 
     useEffect(() => {
-        console.log("Results.js props.sessionToken", props.sessionToken);
+        // console.log("Results.js props.sessionToken", props.sessionToken);
         // console.log("Results.js localStorage token", localStorage.getItem("token"));
     }, [props.sessionToken]);
 
     useEffect(() => {
-        console.log("Results.js activeList", props.activeList);
+        // console.log("Results.js activeList", props.activeList);
     }, [props.activeList]);
 
     return (
@@ -53,7 +53,7 @@ const Results = (props) => {
                 {props.game.cover ? <img src={props.game.cover.url} alt={props.game.name} /> : ""}
                 {props.game ? <CardTitle><a href={props.game.url} target="_blank">{props.game.name}</a></CardTitle> : <CardTitle>{props.game.name}</CardTitle>}
                 {props.game.summary ? <CardText>{props.game.summary}</CardText> : ''}
-                <Button color="success" onClick={() => {/*console.log("Results.js Button click props.game", props.game); */addListItem(props.game);}}>Add</Button>
+                {props.sessionToken !== null && props.sessionToken !== undefined ? <Button color="success" onClick={() => {/*console.log("Results.js Button click props.game", props.game); */ addListItem(props.game);}}>Add</Button> : ''}
                 </CardBody>
             </Card>
         : ""

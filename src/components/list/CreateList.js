@@ -42,7 +42,7 @@ const CreateList = (props) => {
                         <Input name="name" value={listName} onChange={(e) => setListName(e.target.value)} />
                     </FormGroup>
                     <Button className="mr-3" color="primary" disabled={!listName} type="submit">Add List</Button>
-                    <Button outline color="secondary" onClick={handleShow}>Close</Button>
+                    <Button outline color="secondary" onClick={handleShow}>Cancel</Button>
                 </Form>
             </ModalBody>
         </Modal>

@@ -64,7 +64,7 @@ function App() {
       <Search baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} />
       </Col>
       <Col md="6">
-      <List baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} setActiveList={setActiveList} />
+      {sessionToken !== null && sessionToken !== undefined ? <List baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} setActiveList={setActiveList} /> : ""}
       </Col>
       </Row>
       <Row>

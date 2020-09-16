@@ -26,6 +26,8 @@ const Register = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const [emailValidated, setEmailValidated] = useState(false);
+    const [passwordValidated, setPasswordValidated] = useState(false);
     const [formValidated, setFormValidated] = useState(false);
     const [errEmail, setErrEmail] = useState("");
     const [errPassword, setErrPassword] = useState("");
@@ -33,19 +35,40 @@ const Register = (props) => {
     const register = (event) => {
         event.preventDefault();
 
-        if (email.length > 0) {
-            setFormValidated(true);
+        const emailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if (email.match(emailFormat) && email.length > 0) {
+            setEmailValidated(true);
+            setErrEmail("");
+            console.log("Register.js Valid Email Address");
+            console.log("Register.js emailValidated true", emailValidated);
         } else {
-            setFormValidated(false);
-            setErrEmail("Email is required.");
+            setEmailValidated(false);
+            setErrEmail("Please enter a valid email address.");
+            console.log("Register.js emailValidated false", emailValidated);
         };
 
-        if (password.length > 0) {
+        if (password.length > 4) {
+            setPasswordValidated(true);
+            setErrPassword("");
+            console.log("Register.js Valid Password");
+            console.log("Register.js passwordValidated true", passwordValidated);
+        } else {
+            setPasswordValidated(false);
+            setErrPassword("Password must be at least 5 characters.");
+            console.log("Register.js passwordValidated false", passwordValidated);
+        };
+
+        if (emailValidated && passwordValidated) {
             setFormValidated(true);
+            console.log("Register.js Valid Form");
         } else {
             setFormValidated(false);
-            setErrPassword("Password is required.");
+            console.log("Register.js Invalid Form");
         };
+
+        console.log("Register.js emailValidated", emailValidated);
+        console.log("Register.js passwordValidated", passwordValidated);
+        console.log("Register.js formValidated", formValidated);
 
         if (formValidated) {
 
@@ -65,9 +88,15 @@ const Register = (props) => {
                 }),
                 body: JSON.stringify({user: userObject})
             })
+
+            // If registered, then set the session token
+            // Then toggle
+            // Else display error registration failed
+
             .then(res => res.json()) // {console.log("Register.js response", res); res.json();}
             // .then(json => props.updateToken(json.sessionToken)) // {props.setSessionToken(json.sessionToken); console.log("Register.js USER", json); console.log("Register.js json.sessionToken", json.sessionToken);})
             .then(json => props.setSessionToken(json.sessionToken)) // {props.setSessionToken(json.sessionToken); console.log("Register.js USER", json); console.log("Register.js json.sessionToken", json.sessionToken);})
+            .then(toggle())
             .catch(err => console.log(err))
 
             // if (props.sessionToken) {
@@ -103,7 +132,7 @@ const Register = (props) => {
         </ModalBody>
         <ModalFooter>
             <Button type="submit" color="primary" onClick={register}>Register</Button>
-            <Button type="submit" color="secondary" onClick={toggle}>Cancel</Button>
+            <Button outline type="submit" color="secondary" onClick={toggle}>Cancel</Button>
         </ModalFooter>
         </Modal>
         </div>

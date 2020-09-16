@@ -79,7 +79,7 @@ const List = (props) => {
         <div>
         <Nav tabs>
             <NavItem>
-                <NavLink className={classnames({ active: activeTab === "1" })} onClick={() => { toggle("1"); }}>
+                <NavLink className={classnames({ active: activeTab === "4" })} onClick={() => { toggle("4"); }}>
                     My List
                 </NavLink>
             </NavItem>
@@ -91,10 +91,10 @@ const List = (props) => {
         </Nav>
         <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
-        <ListItems baseURL={props.baseURL} /* sessionToken={props.sessionToken} */ activeList={props.activeList} />
+        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
         </TabPane>
         <TabPane tabId="2">
-        <ListItems baseURL={props.baseURL} /* sessionToken={props.sessionToken} */ activeList={props.activeList} />
+        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
         </TabPane>
       </TabContent>
         </div>

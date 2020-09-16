@@ -6,16 +6,6 @@ const Login = (props) => {
     const [modal, setModal] = useState(false);
     const toggle = () => {
 
-        // Causes issues with the fetch?
-        // setEmail("");
-        // setPassword("");
-
-        if (modal) {
-            // Removes the error messages after the fetch if successful or not
-            // setErrEmail("");
-            // setErrPassword("");
-        };
-
         setModal(!modal);
     };
 
@@ -25,10 +15,6 @@ const Login = (props) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    const [formValidated, setFormValidated] = useState(false);
-    const [errEmail, setErrEmail] = useState("");
-    const [errPassword, setErrPassword] = useState("");
 
     const logIn = (event) => {
         event.preventDefault();
@@ -57,14 +43,8 @@ const Login = (props) => {
             // .then(json => props.updateToken(json.sessionToken)) // console.log("Login.js USER", json); console.log("Login.js json.sessionToken)", json.sessionToken);})
             // .then(json => props.updateToken(json.sessionToken)) // console.log("Login.js USER", json); console.log("Login.js json.sessionToken)", json.sessionToken);})
             .then(json => props.setSessionToken(json.sessionToken)) // console.log("Login.js USER", json); console.log("Login.js json.sessionToken)", json.sessionToken);})
-            .then(
-                toggle()
-                )
+            .then(toggle())
             .catch(err => console.log(err))
-
-            // if (props.sessionToken) {
-                // toggle();
-            // };
 
     };
 
@@ -83,18 +63,16 @@ const Login = (props) => {
             <FormGroup>
                 <Label for="txtEmail">Email Address</Label>
                 <Input type="text" id="txtEmail" placeholder="Email Address" value={email} onChange={(e) => {/*console.log(e.target.value); */setEmail(e.target.value);}} />
-                {errEmail} 
             </FormGroup>
             <FormGroup>
                 <Label for="txtPassword">Password</Label>
                 <Input type="password" id="password" placeholder="Password" value={password} onChange={(e) => {/*console.log(e.target.value); */setPassword(e.target.value);}} />
-                {errPassword}
             </FormGroup>
         </Form>
         </ModalBody>
         <ModalFooter>
             <Button type="submit" color="primary" onClick={logIn}>Log In</Button>
-            <Button type="submit" color="secondary" onClick={toggle}>Cancel</Button>
+            <Button outline type="submit" color="secondary" onClick={toggle}>Cancel</Button>
         </ModalFooter>
         </Modal>
         </div>
