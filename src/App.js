@@ -17,7 +17,7 @@ function App() {
   const baseURL = API_URL + "/";
 
   const [sessionToken, setSessionToken] = useState(undefined);
-  const [activeList, setActiveList] = useState(4);
+  const [activeList, setActiveList] = useState(0);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -59,7 +59,7 @@ function App() {
       <Search baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} />
       </Col>
       <Col md="6">
-      <List baseURL={baseURL} sessionToken={sessionToken} setActiveList={setActiveList} />
+      <List baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} setActiveList={setActiveList} />
       </Col>
       </Row>
       <Row>

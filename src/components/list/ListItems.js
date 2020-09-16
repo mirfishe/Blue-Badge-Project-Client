@@ -19,8 +19,13 @@ const ListItems = (props) => {
 
 
     useEffect(() => {
-        console.log("ListItem.js props.sessionToken", props.sessionToken);
-    }, [props.sessionToken]);
+        // console.log("ListItem.js props.sessionToken", props.sessionToken); // Never shows the current value of sessionToken
+        console.log("ListItem.js localStorage token", localStorage.getItem("token"));
+    }, []);
+
+    useEffect(() => {
+        console.log("ListItem.js props.activeList", props.activeList);
+    }, [props.activeList]);
 
     return (
         <Row>

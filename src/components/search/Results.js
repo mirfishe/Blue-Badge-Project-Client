@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Container, Col, Row, Button, Card, CardBody, CardText, CardTitle} from 'reactstrap';
 import "./Results.css";
 
@@ -40,9 +40,14 @@ const Results = (props) => {
 
     };
 
-    // useEffect(() => {
-    //     console.log("Results.js activeList", props.activeList);
-    // }, [results]);
+    useEffect(() => {
+        // console.log("Results.js props.sessionToken", props.sessionToken); // Never shows the current value of sessionToken
+        console.log("Results.js localStorage token", localStorage.getItem("token"));
+    }, []);
+
+    useEffect(() => {
+        console.log("Results.js activeList", props.activeList);
+    }, [props.activeList]);
 
     return (
         <Col>
