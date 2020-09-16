@@ -15,6 +15,7 @@ const List = (props) => {
     const [deleteList, setDeleteList] = useState(false)
     const [listToEdit, setListToEdit] = useState({})
     const [listToDelete, setListToDelete] = useState({})
+    const [lists, setLists] = useState([]);
 
     const toggle = tab => {
       if(activeTab !== tab) setActiveTab(tab);
@@ -39,6 +40,25 @@ const List = (props) => {
     const updateListToDelete = (list) => {
         setListToDelete(list);
     }
+    
+    const getList = () => {
+
+        let url = props.baseURL + "list/";
+
+      fetch(url, {
+        method: "GET",
+        headers: new Headers({
+          "Content-Type": "application/json",
+          "Authorization": props.sessionToken
+        }),
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          console.log("getList json", json);
+          setLists(json);
+        })
+        .catch((err) => console.log(err));
+    } 
 
     useEffect(() => {
         console.log("List.js props.sessionToken", props.sessionToken);
@@ -67,6 +87,7 @@ const List = (props) => {
         <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} />
         </TabPane>
       </TabContent>
+      <GetList baseURL={props.baseURL} sessionToken={props.sessionToken}/>
         </div>
     );
 };
