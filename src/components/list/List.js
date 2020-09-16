@@ -18,7 +18,12 @@ const List = (props) => {
     const [lists, setLists] = useState([]);
 
     const toggle = tab => {
-      if(activeTab !== tab) setActiveTab(tab);
+
+      if(activeTab !== tab) {
+        setActiveTab(tab);
+        props.setActiveList(tab);
+      };
+
     };
 
     const addOn = () => {
@@ -61,8 +66,13 @@ const List = (props) => {
     } 
 
     useEffect(() => {
-        console.log("List.js props.sessionToken", props.sessionToken);
-    }, [props.sessionToken]);
+        // console.log("List.js props.sessionToken", props.sessionToken); // Never shows the current value of sessionToken
+        console.log("List.js localStorage token", localStorage.getItem("token"));
+    }, []);
+
+    useEffect(() => {
+        console.log("List.js props.activeList", props.activeList);
+    }, [props.activeList]);
     
 
     return (
@@ -81,13 +91,12 @@ const List = (props) => {
         </Nav>
         <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
-        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} />
+        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
         </TabPane>
         <TabPane tabId="2">
-        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} />
+        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
         </TabPane>
       </TabContent>
-      <GetList baseURL={props.baseURL} sessionToken={props.sessionToken}/>
         </div>
     );
 };
