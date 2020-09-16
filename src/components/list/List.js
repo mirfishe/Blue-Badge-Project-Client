@@ -65,7 +65,7 @@ const List = (props) => {
       })
         .then((res) => res.json())
         .then((json) => {
-          console.log("getList json", json);
+          // console.log("getList json", json);
           setLists(json);
         })
         .catch((err) => console.log(err));
@@ -104,15 +104,14 @@ const List = (props) => {
         <TabContent activeTab={activeTab}>
         <TabPane tabId={0}>
             Testing 1
-       
+        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
         </TabPane>
         <TabPane tabId={1}>
             Testing 2
-       
         </TabPane>
         <TabPane tabId={2}>
             Testing 3
-       
+        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
         </TabPane>
       </TabContent>
         </div>

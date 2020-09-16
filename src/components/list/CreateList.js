@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from "react";
 import {Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody} from 'reactstrap';
 
 const CreateList = (props) => {
@@ -7,7 +7,7 @@ const CreateList = (props) => {
 
     const addOff = () => {
         props.setAddList(false);
-    }
+    };
 
     let url = props.baseURL + 'list/add';
 
@@ -24,14 +24,20 @@ const CreateList = (props) => {
         .then((res) => {
             props.getList();
             addOff();
-            console.log(res);
+            // console.log(res);
         })
-    }
+    };
 
     const handleShow = () => {
         setIsOpen(false);
         addOff();
-    }
+    };
+
+    useEffect(() => {
+        console.log("CreateList.js props.sessionToken", props.sessionToken);
+        // console.log("CreateList.js localStorage token", localStorage.getItem("token"));
+    }, [props.sessionToken]);
+
     return (
         <Modal isOpen={isOpen}>
             <ModalHeader>Create New List</ModalHeader>
@@ -42,7 +48,7 @@ const CreateList = (props) => {
                         <Input name="name" value={listName} onChange={(e) => setListName(e.target.value)} />
                     </FormGroup>
                     <Button className="mr-3" color="primary" disabled={!listName} type="submit">Add List</Button>
-                    <Button outline color="secondary" onClick={handleShow}>Close</Button>
+                    <Button outline color="secondary" onClick={handleShow}>Cancel</Button>
                 </Form>
             </ModalBody>
         </Modal>
