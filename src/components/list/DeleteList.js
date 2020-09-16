@@ -35,8 +35,8 @@ const DeleteList = (props) => {
         <Modal isOpen={isOpen}>
             <ModalHeader>Are you sure you would like to delete list?</ModalHeader>
             <ModalBody>
-                    <Button onClick={deleteList} type="submit">Confirm Delete</Button>
-                    <Button onClick={handleShow}>Close</Button>
+                    <Button className="mr-3" color="danger" onClick={deleteList} type="submit">Confirm Delete</Button>
+                    <Button outline color="secondary" onClick={handleShow}>Close</Button>
             </ModalBody>
         </Modal>
     )

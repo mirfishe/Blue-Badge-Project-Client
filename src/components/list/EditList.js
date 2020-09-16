@@ -42,8 +42,8 @@ const EditList = (props) => {
                         <Label htmlFor="name">List Name:</Label>
                         <Input name="name" value={editListName} onChange={(e) => setEditListName(e.target.value)} />
                     </FormGroup>
-                    <Button type="submit">Add List</Button>
-                    <Button onClick={handleShow}>Close</Button>
+                    <Button className="mr-3" color="primary" disabled={!editListName} type="submit">Add List</Button>
+                    <Button outline color="secondary" onClick={handleShow}>Close</Button>
                 </Form>
             </ModalBody>
         </Modal>
