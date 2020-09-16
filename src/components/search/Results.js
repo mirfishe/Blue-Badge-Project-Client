@@ -10,8 +10,39 @@ const Results = (props) => {
 
         console.log("Results.js addListItem props.game", game);
         console.log("Results.js props.sessionToken", props.sessionToken);
+        console.log("Results.js activeList", props.activeList);
+
+        let URL = props.baseURL + "item/add/" + props.activeList;
+        console.log("Results.js URL", URL);
+
+        let listItemObject = {
+            itemName: game.name,
+            itemURL: game.url,
+            imageURL: game.cover.url,
+            sortID: 0
+        };
+        console.log("Results.js listItemObject", listItemObject);
+
+        fetch(URL, {
+            method: "POST",
+            headers:    new Headers ({
+                'Content-Type': 'application/json',
+                "Authorization": props.sessionToken
+            }),
+            body: JSON.stringify({item: listItemObject})
+        })
+        .then(res => {console.log("Results.js response", res); res.json();}) // {console.log("Search.js response", res); res.json();}
+        // .then(() => ) // re-fetch list items and display in component
+        .catch(err => console.log(err))
+
+
+        // .then(() => ) // re-fetch list items and display in component
 
     };
+
+    // useEffect(() => {
+    //     console.log("Results.js activeList", props.activeList);
+    // }, [results]);
 
     return (
         <Col>

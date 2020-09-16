@@ -17,12 +17,13 @@ function App() {
   const baseURL = API_URL + "/";
 
   const [sessionToken, setSessionToken] = useState(undefined);
+  const [activeList, setActiveList] = useState(4);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setSessionToken(localStorage.getItem("token"));
       console.log("App.js localStorage token", localStorage.getItem("token"));
-      // console.log("sessionToken", sessionToken); // Never shows the current value of sessionToken
+      // console.log("App.js sessionToken", sessionToken); // Never shows the current value of sessionToken
     };
   }, []);
 
@@ -30,7 +31,7 @@ function App() {
     localStorage.setItem("token", newToken);
     setSessionToken(newToken);
     console.log("App.js newToken", newToken);
-    // console.log("sessionToken", sessionToken); // Never shows the current value of sessionToken
+    // console.log("App.js sessionToken", sessionToken); // Never shows the current value of sessionToken
     console.log("User token changed.");
   };
 
@@ -38,7 +39,7 @@ function App() {
     localStorage.clear();
     setSessionToken("");
     console.log("App.js localStorage token", localStorage.getItem("token"));
-    // console.log("sessionToken", sessionToken); // Never shows the current value of sessionToken
+    // console.log("App.js sessionToken", sessionToken); // Never shows the current value of sessionToken
     console.log("User logged out.");
   };
 
@@ -55,10 +56,10 @@ function App() {
       </Row>
       <Row className="mp-3">
       <Col md="6">
-      <Search baseURL={baseURL} sessionToken={sessionToken} />
+      <Search baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} />
       </Col>
       <Col md="6">
-      <List baseURL={baseURL} sessionToken={sessionToken} />
+      <List baseURL={baseURL} sessionToken={sessionToken} setActiveList={setActiveList} />
       </Col>
       </Row>
       <Row>
@@ -66,6 +67,6 @@ function App() {
       </Row>
     </Container>
   );
-}
+};
 
 export default App;

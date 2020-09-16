@@ -43,13 +43,14 @@ const Search = (props) => {
 
     };
 
-    useEffect(() => {
-        console.log("Search.js results", results);
-    }, [results]);
+    // useEffect(() => {
+    //     console.log("Search.js results", results);
+    // }, [results]);
 
     useEffect(() => {
         console.log("Search.js props.sessionToken", props.sessionToken);
         setResults([]);
+        setSearchTerms([]);
     }, [props.sessionToken]);
 
     return (
@@ -64,7 +65,7 @@ const Search = (props) => {
         </Form>
         </Row>
         <Row>
-            {results.length > 0 ? results.map(game => <Results game={game.game} />) : ""}
+            {results.length > 0 ? results.map(game => <Results game={game.game} baseURL={props.baseURL} activeList={props.activeList} />) : ""}
         </Row>
         </Container>
     );

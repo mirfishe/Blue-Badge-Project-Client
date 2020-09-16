@@ -33,21 +33,6 @@ const Login = (props) => {
     const logIn = (event) => {
         event.preventDefault();
 
-        if (email.length > 0) {
-            setFormValidated(true);
-        } else {
-            setFormValidated(false);
-            setErrEmail("Email is required.");
-        };
-
-        if (password.length > 0) {
-            setFormValidated(true);
-        } else {
-            setFormValidated(false);
-            setErrPassword("Password is required.");
-        };
-
-        if (formValidated) {
             let userObject = {
                 email:  email.trim(),
                 password:  password.trim()
@@ -65,20 +50,25 @@ const Login = (props) => {
                 body: JSON.stringify({user: userObject})
             })
             .then(res => res.json()) // {console.log("Login.js response", res); res.json();}
+
+            // If not unauthorized, then set the session token
+            // Then toggle
+            // Else display error authenication failed
             .then(json => props.updateToken(json.sessionToken)) // console.log("Login.js USER", json); console.log("Login.js json.sessionToken)", json.sessionToken);})
-            // .then(
-            //     toggle()
-            //     )
+            .then(
+                toggle()
+                )
             .catch(err => console.log(err))
 
             // if (props.sessionToken) {
                 // toggle();
             // };
 
-        };
     };
 
-
+    useEffect(() => {
+        console.log("Login.js localStorage token", localStorage.getItem("token"));
+    }, []);
 
     return (
         <div className="m-2">
