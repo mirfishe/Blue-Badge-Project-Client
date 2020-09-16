@@ -17,11 +17,11 @@ const List = (props) => {
     const [listToDelete, setListToDelete] = useState({})
     const [lists, setLists] = useState([]);
 
-    const toggle = tab => {
+    const toggle = (tab, id) => {
 
       if(activeTab !== tab) {
         setActiveTab(tab);
-        props.setActiveList(tab);
+        props.setActiveList(id);
       };
 
     };
@@ -64,6 +64,9 @@ const List = (props) => {
         })
         .catch((err) => console.log(err));
     } 
+    useEffect(() => {
+        getList();
+    },[props.sessionToken])
 
     useEffect(() => {
       console.log("List.js props.sessionToken", props.sessionToken);
@@ -77,23 +80,30 @@ const List = (props) => {
 
     return (
         <div>
-        <Nav tabs>
+            <Nav>
+                {lists.length > 0 ?lists.map((lists, index) => {
+                    return(
+                    <NavItem key={index}>
+                     <NavLink className={classnames({ active: activeTab === index })} onClick={() => { toggle(index, lists.id); }}>
+                         {lists.listName}
+                     </NavLink>
+                    </NavItem>
+                    )}
+                     ) 
+                     : ''}
             <NavItem>
-                <NavLink className={classnames({ active: activeTab === "1" })} onClick={() => { toggle("1"); }}>
-                    My List
-                </NavLink>
-            </NavItem>
-            <NavItem>
-            <NavLink className={classnames({ active: activeTab === "2" })} onClick={() => { toggle("2"); addOn(); }}>
-                    {(addList) ? <CreateList setAddList={setAddList} /* sessionToken={props.sessionToken} */ baseURL={props.baseURL}/>: "Add List"}
+            <NavLink onClick={() => { addOn(); }}>
+                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL} getList={getList}/>: "Add List"}
                 </NavLink>
             </NavItem>
         </Nav>
         <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
+            Testing 1
         <ListItems baseURL={props.baseURL} /* sessionToken={props.sessionToken} */ activeList={props.activeList} />
         </TabPane>
         <TabPane tabId="2">
+            Testing 2
         <ListItems baseURL={props.baseURL} /* sessionToken={props.sessionToken} */ activeList={props.activeList} />
         </TabPane>
       </TabContent>
