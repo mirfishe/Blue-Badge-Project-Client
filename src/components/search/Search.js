@@ -43,16 +43,13 @@ const Search = (props) => {
 
     };
 
-    // useEffect(() => {
-    //     console.log("Search.js results", results);
-    // }, [results]);
 
     useEffect(() => {
-        // console.log("Search.js props.sessionToken", props.sessionToken); // Never shows the current value of sessionToken
-        console.log("Search.js localStorage token", localStorage.getItem("token"));
+        console.log("Search.js props.sessionToken", props.sessionToken);
+        // console.log("Search.js localStorage token", localStorage.getItem("token"));
         // setResults([]);
         // setSearchTerms([]);
-    }, []);
+    }, [props.sessionToken]);
 
     return (
         <Container className="m-3">

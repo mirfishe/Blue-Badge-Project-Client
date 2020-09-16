@@ -54,7 +54,9 @@ const Login = (props) => {
             // If not unauthorized, then set the session token
             // Then toggle
             // Else display error authenication failed
-            .then(json => props.updateToken(json.sessionToken)) // console.log("Login.js USER", json); console.log("Login.js json.sessionToken)", json.sessionToken);})
+            // .then(json => props.updateToken(json.sessionToken)) // console.log("Login.js USER", json); console.log("Login.js json.sessionToken)", json.sessionToken);})
+            // .then(json => props.updateToken(json.sessionToken)) // console.log("Login.js USER", json); console.log("Login.js json.sessionToken)", json.sessionToken);})
+            .then(json => props.setSessionToken(json.sessionToken)) // console.log("Login.js USER", json); console.log("Login.js json.sessionToken)", json.sessionToken);})
             .then(
                 toggle()
                 )
@@ -67,8 +69,9 @@ const Login = (props) => {
     };
 
     useEffect(() => {
-        console.log("Login.js localStorage token", localStorage.getItem("token"));
-    }, []);
+        console.log("Login.js props.sessionToken", props.sessionToken);
+        // console.log("Login.js localStorage token", localStorage.getItem("token"));
+    }, [props.sessionToken]);
 
     return (
         <div className="m-2">

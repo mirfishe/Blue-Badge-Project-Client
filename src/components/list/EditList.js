@@ -23,7 +23,7 @@ const EditList = (props) => {
             body: JSON.stringify({list: {title: editListName}}),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem("token")
+                'Authorization': props.sessionToken
             })
         })
         .then((res) => {

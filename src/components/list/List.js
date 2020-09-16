@@ -54,7 +54,7 @@ const List = (props) => {
         method: "GET",
         headers: new Headers({
           "Content-Type": "application/json",
-          "Authorization": localStorage.getItem("token")
+          "Authorization": props.sessionToken
         }),
       })
         .then((res) => res.json())
@@ -66,9 +66,9 @@ const List = (props) => {
     } 
 
     useEffect(() => {
-        // console.log("List.js props.sessionToken", props.sessionToken); // Never shows the current value of sessionToken
-        console.log("List.js localStorage token", localStorage.getItem("token"));
-    }, []);
+      console.log("List.js props.sessionToken", props.sessionToken);
+      // console.log("List.js localStorage token", localStorage.getItem("token"));
+  }, [props.sessionToken]);
 
     useEffect(() => {
         console.log("List.js props.activeList", props.activeList);

@@ -9,7 +9,7 @@ const ListItems = (props) => {
                 method: 'DELETE',
                 headers:    new Headers ({
                     'Content-Type': 'application/json',
-                    "Authorization": localStorage.getItem("token")
+                    "Authorization": props.sessionToken
                 })
             })
             .then(res => res.json())
@@ -17,14 +17,13 @@ const ListItems = (props) => {
             .catch(err => console.log(err))
     };
 
+    useEffect(() => {
+        console.log("ListItems.js props.sessionToken", props.sessionToken);
+        // console.log("ListItems.js localStorage token", localStorage.getItem("token"));
+    }, [props.sessionToken]);
 
     useEffect(() => {
-        // console.log("ListItem.js props.sessionToken", props.sessionToken); // Never shows the current value of sessionToken
-        console.log("ListItem.js localStorage token", localStorage.getItem("token"));
-    }, []);
-
-    useEffect(() => {
-        console.log("ListItem.js props.activeList", props.activeList);
+        console.log("ListItems.js props.activeList", props.activeList);
     }, [props.activeList]);
 
     return (

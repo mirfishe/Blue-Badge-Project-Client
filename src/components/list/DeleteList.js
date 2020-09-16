@@ -21,7 +21,7 @@ const DeleteList = (props) => {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem("token")
+                'Authorization': props.sessionToken
             })
         })
         .then((res) => {

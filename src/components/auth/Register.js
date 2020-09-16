@@ -20,7 +20,7 @@ const Register = (props) => {
     };
 
     useEffect(() => {
-        console.log("Login.js modal", modal);
+        console.log("Register.js modal", modal);
     }, [modal]);
     
     const [email, setEmail] = useState("");
@@ -66,7 +66,8 @@ const Register = (props) => {
                 body: JSON.stringify({user: userObject})
             })
             .then(res => res.json()) // {console.log("Register.js response", res); res.json();}
-            .then(json => props.updateToken(json.sessionToken)) // {props.setSessionToken(json.sessionToken); console.log("Register.js USER", json); console.log("Register.js json.sessionToken", json.sessionToken);})
+            // .then(json => props.updateToken(json.sessionToken)) // {props.setSessionToken(json.sessionToken); console.log("Register.js USER", json); console.log("Register.js json.sessionToken", json.sessionToken);})
+            .then(json => props.setSessionToken(json.sessionToken)) // {props.setSessionToken(json.sessionToken); console.log("Register.js USER", json); console.log("Register.js json.sessionToken", json.sessionToken);})
             .catch(err => console.log(err))
 
             // if (props.sessionToken) {
@@ -77,8 +78,9 @@ const Register = (props) => {
     };
 
     useEffect(() => {
-        console.log("Register.js localStorage token", localStorage.getItem("token"));
-    }, []);
+        console.log("Register.js props.sessionToken", props.sessionToken);
+        // console.log("Register.js localStorage token", localStorage.getItem("token"));
+    }, [props.sessionToken]);
 
     return (
         <div className="m-2">

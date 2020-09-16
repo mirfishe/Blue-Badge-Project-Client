@@ -23,7 +23,7 @@ const Results = (props) => {
             method: "POST",
             headers:    new Headers ({
                 'Content-Type': 'application/json',
-                "Authorization": localStorage.getItem("token")
+                "Authorization": props.sessionToken
             }),
             body: JSON.stringify({item: listItemObject})
         })
@@ -37,9 +37,9 @@ const Results = (props) => {
     };
 
     useEffect(() => {
-        // console.log("Results.js props.sessionToken", props.sessionToken); // Never shows the current value of sessionToken
+        console.log("Results.js props.sessionToken", props.sessionToken);
         // console.log("Results.js localStorage token", localStorage.getItem("token"));
-    }, []);
+    }, [props.sessionToken]);
 
     useEffect(() => {
         console.log("Results.js activeList", props.activeList);
