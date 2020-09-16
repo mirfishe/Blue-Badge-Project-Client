@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Container, Col, Row, Button} from "reactstrap";
+import {Container, Col, Row, Button, Table} from "reactstrap";
 import "./ListItems.css";
 
 const ListItems = (props) => {
@@ -39,7 +39,7 @@ const ListItems = (props) => {
     return (
         <Row>
             <Col>List Items
-            {getListItems()}
+            {/* {getListItems()} */}
             {/* <Button color="danger" onClick={() => {deleteListItem(listItem)}}>Delete</Button> */}
             </Col>
         </Row>

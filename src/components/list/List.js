@@ -6,6 +6,7 @@ import ListItems from "./ListItems";
 import CreateList from "./CreateList";
 import EditList from "./EditList";
 import DeleteList from "./DeleteList";
+import ListID from './ListID'; //Testing purposes
 
 const List = (props) => {
 
@@ -106,6 +107,7 @@ const List = (props) => {
             Testing 2
         <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
         </TabPane>
+        {/* <ListID baseURL={props.baseURL} sessionToken={props.sessionToken} /> */}
       </TabContent>
         </div>
     );

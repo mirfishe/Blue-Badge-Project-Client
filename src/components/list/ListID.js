@@ -8,10 +8,10 @@ import {
   NavLink,
   TabContent,
   TabPane,
+  Table,
 } from "reactstrap";
 
 const GetList = (props) => {
-  const [lists, setLists] = useState([]);
   const [listItem, setListItem] = useState([]);
 
   const getListItems = () => {
@@ -21,7 +21,7 @@ const GetList = (props) => {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
-        "Authorization": props.sessionToken,
+        Authorization: props.sessionToken,
       }),
     })
       .then((res) => res.json())
@@ -31,9 +31,37 @@ const GetList = (props) => {
       })
       .catch((err) => console.log(err));
   };
-  return (
-      <div>Testing {getListItems()}</div>
-  )
+
+  const itemMapper = () => {
+    return props.listItem.map((item, index) => {
+      return(
+        <tr key={index}>
+          <td>{item.itemName}</td>
+          <td>{item.itemURL}</td>
+          <td>{item.imageURL}</td>
+        </tr>
+      )
+    })
+  }
+
+  useEffect(() => {
+    getListItems();
+  }, []);
+
+  return <Container>
+    <Row>
+      <Col md="3">
+        {/* the create component will go here*/}
+      </Col>
+      <Col md="9">
+        <Table striped>
+          <tbody>
+          {itemMapper()}
+          </tbody>
+        </Table>
+      </Col>
+    </Row>
+  </Container>;
 };
 
 export default GetList;
