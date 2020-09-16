@@ -54,7 +54,7 @@ const List = (props) => {
         method: "GET",
         headers: new Headers({
           "Content-Type": "application/json",
-          "Authorization": props.sessionToken
+          "Authorization": localStorage.getItem("token")
         }),
       })
         .then((res) => res.json())
@@ -85,16 +85,16 @@ const List = (props) => {
             </NavItem>
             <NavItem>
             <NavLink className={classnames({ active: activeTab === "2" })} onClick={() => { toggle("2"); addOn(); }}>
-                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL}/>: "Add List"}
+                    {(addList) ? <CreateList setAddList={setAddList} /* sessionToken={props.sessionToken} */ baseURL={props.baseURL}/>: "Add List"}
                 </NavLink>
             </NavItem>
         </Nav>
         <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
-        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
+        <ListItems baseURL={props.baseURL} /* sessionToken={props.sessionToken} */ activeList={props.activeList} />
         </TabPane>
         <TabPane tabId="2">
-        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
+        <ListItems baseURL={props.baseURL} /* sessionToken={props.sessionToken} */ activeList={props.activeList} />
         </TabPane>
       </TabContent>
         </div>

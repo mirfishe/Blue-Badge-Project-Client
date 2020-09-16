@@ -9,7 +9,7 @@ const ListItems = (props) => {
                 method: 'DELETE',
                 headers:    new Headers ({
                     'Content-Type': 'application/json',
-                    "Authorization": props.sessionToken
+                    "Authorization": localStorage.getItem("token")
                 })
             })
             .then(res => res.json())

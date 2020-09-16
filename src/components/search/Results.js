@@ -8,10 +8,6 @@ const Results = (props) => {
 
     const addListItem = (game) => {
 
-        console.log("Results.js addListItem props.game", game);
-        console.log("Results.js props.sessionToken", props.sessionToken);
-        console.log("Results.js activeList", props.activeList);
-
         let URL = props.baseURL + "item/add/" + props.activeList;
         console.log("Results.js URL", URL);
 
@@ -27,7 +23,7 @@ const Results = (props) => {
             method: "POST",
             headers:    new Headers ({
                 'Content-Type': 'application/json',
-                "Authorization": props.sessionToken
+                "Authorization": localStorage.getItem("token")
             }),
             body: JSON.stringify({item: listItemObject})
         })
@@ -42,7 +38,7 @@ const Results = (props) => {
 
     useEffect(() => {
         // console.log("Results.js props.sessionToken", props.sessionToken); // Never shows the current value of sessionToken
-        console.log("Results.js localStorage token", localStorage.getItem("token"));
+        // console.log("Results.js localStorage token", localStorage.getItem("token"));
     }, []);
 
     useEffect(() => {

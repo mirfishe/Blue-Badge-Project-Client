@@ -18,7 +18,7 @@ const CreateList = (props) => {
             body: JSON.stringify({list: {title: listName}}),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': props.sessionToken
+                'Authorization': localStorage.getItem("token")
             })
         })
         .then((res) => {

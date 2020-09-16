@@ -16,20 +16,25 @@ function App() {
   // const baseURL = "https://tw-blue-badge-server.herokuapp.com/";
   const baseURL = API_URL + "/";
 
-  const [sessionToken, setSessionToken] = useState(undefined);
+  // const [sessionToken, setSessionToken] = useState(undefined);
   const [activeList, setActiveList] = useState(0);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      setSessionToken(localStorage.getItem("token"));
+      // setSessionToken(localStorage.getItem("token"));
+      // console.log("App.js setSessionToken");
       console.log("App.js localStorage token", localStorage.getItem("token"));
       // console.log("App.js sessionToken", sessionToken); // Never shows the current value of sessionToken
     };
   }, []);
 
+  // useEffect(() => {
+  //     console.log("App.js sessionToken", sessionToken); // Never shows the current value of sessionToken
+  // }, [sessionToken]);
+
   const updateToken = (newToken) => {
     localStorage.setItem("token", newToken);
-    setSessionToken(newToken);
+    // setSessionToken(newToken);
     console.log("App.js newToken", newToken);
     // console.log("App.js sessionToken", sessionToken); // Never shows the current value of sessionToken
     console.log("User token changed.");
@@ -37,7 +42,7 @@ function App() {
 
   const clearToken = () => {
     localStorage.clear();
-    setSessionToken("");
+    // setSessionToken("");
     console.log("App.js localStorage token", localStorage.getItem("token"));
     // console.log("App.js sessionToken", sessionToken); // Never shows the current value of sessionToken
     console.log("User logged out.");
@@ -56,10 +61,10 @@ function App() {
       </Row>
       <Row className="mp-3">
       <Col md="6">
-      <Search baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} />
+      <Search baseURL={baseURL} /* sessionToken={sessionToken} */ activeList={activeList} />
       </Col>
       <Col md="6">
-      <List baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} setActiveList={setActiveList} />
+      <List baseURL={baseURL} /* sessionToken={sessionToken} */ activeList={activeList} setActiveList={setActiveList} />
       </Col>
       </Row>
       <Row>
