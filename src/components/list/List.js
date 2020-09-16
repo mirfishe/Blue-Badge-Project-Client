@@ -68,9 +68,12 @@ const List = (props) => {
         .then((json) => {
           // console.log("getList json", json);
           setLists(json);
+          props.setActiveList(json[0].id);
+          setActiveTab(0);
         })
         .catch((err) => console.log(err));
-    } 
+    };
+
     useEffect(() => {
         getList();
     },[props.sessionToken])
@@ -88,7 +91,7 @@ const List = (props) => {
     return (
         <div>
             <Nav tabs>
-                {lists.length > 0 ?lists.map((lists, index) => {
+                {lists.length > 0 ? lists.map((lists, index) => {
                     return(
                     <NavItem key={index}>
                      <NavLink className={classnames({ active: activeTab === index })} index={index} onClick={() => { toggleTab(index); toggleId(lists.id)  }}>
