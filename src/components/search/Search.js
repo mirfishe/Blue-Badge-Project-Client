@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Container, Col, Row, Form, FormGroup, Button, Input} from "reactstrap";
+import {Container, Col, Row, Alert, Form, FormGroup, Button, Input} from "reactstrap";
 import "./Search.css";
 import Results from "./Results";
 
@@ -41,7 +41,7 @@ const Search = (props) => {
         if (searchTerms.length > 0) {
             searchGames();
         } else {
-            setErrSearchTerms("Please enter search terms.");
+            setErrSearchTerms("Please enter a search.");
         };
 
     };
@@ -64,6 +64,10 @@ const Search = (props) => {
     }, [props.sessionToken]);
 
     useEffect(() => {
+        // console.log("Search.js results", results);
+    }, [results]);
+
+    useEffect(() => {
         console.log("Search.js activeList", props.activeList);
     }, [props.activeList]);
 
@@ -73,7 +77,7 @@ const Search = (props) => {
         <Form onSubmit={frmSearchGames}>
         <FormGroup>
         <Input type="text" id="searchTerms" placeholder="Search Terms" value={searchTerms} onChange={(e) => {/*console.log(e.target.value); */setSearchTerms(e.target.value);}} />
-        {errSearchTerms} 
+        {errSearchTerms !== "" ? <Alert color="danger">{errSearchTerms}</Alert> : ""}
         </FormGroup>
         <Button type="submit" color="primary">Search</Button>
         <Button type="submit" outline color="secondary" onClick={newSearch}> New Search</Button>

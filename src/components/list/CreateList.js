@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from "react";
 import {Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody} from 'reactstrap';
 
 const CreateList = (props) => {
@@ -7,7 +7,7 @@ const CreateList = (props) => {
 
     const addOff = () => {
         props.setAddList(false);
-    }
+    };
 
     let url = props.baseURL + 'list/add';
 
@@ -22,16 +22,22 @@ const CreateList = (props) => {
             })
         })
         .then((res) => {
-            // need to add function to re-GET lists
+            props.getList();
             addOff();
-            console.log(res);
+            // console.log(res);
         })
-    }
+    };
 
     const handleShow = () => {
         setIsOpen(false);
         addOff();
-    }
+    };
+
+    useEffect(() => {
+        console.log("CreateList.js props.sessionToken", props.sessionToken);
+        // console.log("CreateList.js localStorage token", localStorage.getItem("token"));
+    }, [props.sessionToken]);
+
     return (
         <Modal isOpen={isOpen}>
             <ModalHeader>Create New List</ModalHeader>
