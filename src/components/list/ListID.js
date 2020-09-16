@@ -11,6 +11,8 @@ import {
   Table,
 } from "reactstrap";
 
+//Turner was using this file for testing purposes, can be disregarded or deleted
+
 const GetList = (props) => {
   const [listItem, setListItem] = useState([]);
 
