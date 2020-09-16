@@ -3,11 +3,11 @@ import {Container, Col, Row, Button, Table} from "reactstrap";
 import "./ListItems.css";
 
 const ListItems = (props) => {
-    const [listItem, setListItem] = useState([]);
+    const [listItems, setListItems] = useState([]);
 
     const getListItems = () => {
-        let url = props.baseURL + "list/2";
-    
+        let url = props.baseURL + "list/" + props.activeList;
+      console.log("url log", url)
         fetch(url, {
           method: "GET",
           headers: new Headers({
@@ -18,10 +18,22 @@ const ListItems = (props) => {
           .then((res) => res.json())
           .then((json) => {
             console.log("getListItem json", json);
-            setListItem(json);
+            setListItems(json);
           })
           .catch((err) => console.log(err));
       };
+
+      const itemMapper = () => {
+        return listItems.map((item, index) => {
+          return(
+            <tr key={index}>
+              <td>{item.itemName}</td>
+              <td>{item.itemURL}</td>
+              <td>{item.imageURL}</td>
+            </tr>
+          )
+        })
+      }
 
       useEffect(() => {
           getListItems()
@@ -37,15 +49,27 @@ const ListItems = (props) => {
     }, [props.activeList]);
 
     return (
-        <Row>
-            <Col>List Items
-            {/* {getListItems()} */}
-            {/* <Button color="danger" onClick={() => {deleteListItem(listItem)}}>Delete</Button> */}
-            </Col>
-        </Row>
+        // <Row>
+        //     <Col>List Items
+        //     {/* {getListItems()} */}
+        //     {/* <Button color="danger" onClick={() => {deleteListItem(listItem)}}>Delete</Button> */}
+        //     </Col>
+        // </Row>
+        <Table>
+          {/* {itemMapper()} */}
+         {listItems.map((item, index) => {
+          return(
+            <tr key={index}>
+              <td>{item.itemName}</td>
+              <td>{item.itemURL}</td>
+              <td>{item.imageURL}</td>
+            </tr>
+          )
+        })}
+        </Table>
         
     );
 };
-
+// notes 
 
 export default ListItems;

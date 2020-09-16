@@ -104,18 +104,11 @@ const List = (props) => {
         </Nav>
         <TabContent activeTab={activeTab}>
         <TabPane tabId={0}>
-            Testing 1
+     
         <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
         </TabPane>
-        <TabPane tabId={1}>
-            Testing 2
-        </TabPane>
-        <TabPane tabId={2}>
-            Testing 3
-        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
-        </TabPane>
-        {/* <ListID baseURL={props.baseURL} sessionToken={props.sessionToken} /> */}
       </TabContent>
+      <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
         </div>
     );
 };

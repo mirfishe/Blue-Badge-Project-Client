@@ -50,9 +50,6 @@ const GetList = (props) => {
 
   return <Container>
     <Row>
-      <Col md="3">
-        {/* the create component will go here*/}
-      </Col>
       <Col md="9">
         <Table striped>
           <tbody>
