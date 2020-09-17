@@ -42,15 +42,16 @@
 }
 
 .emptyState {
-  max-height: 350px;
+  max-height: 10em;
   display: block;
   margin: auto;
   text-align: center;
-  color: white;
+  color: rgb(80, 80, 80);
   margin-top: 1em;
 }
 
 body{
-  background-color: rgb(73, 73, 73);
+  /* background-color: rgb(126, 126, 126); */
+  background-color: white;
   height: 120vh;
 }
