@@ -14,7 +14,7 @@ const DeleteList = (props) => {
         deleteOff();
     };
 
-    let url = `props.baseURL/list/delete/${props.listToDelete.id}`;
+    let url = `${props.baseURL}list/delete/${props.activeList}`;
 
     const deleteList = (event) => {
         event.preventDefault();
@@ -26,7 +26,7 @@ const DeleteList = (props) => {
             })
         })
         .then((res) => {
-            // need to add function to re-GET lists
+            props.getList();
             deleteOff();
             console.log(res);
         })

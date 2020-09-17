@@ -36,38 +36,31 @@ const ListItems = (props) => {
         fetch(`${props.baseURL}item/delete/${item.id}`, {
           method: 'DELETE',
           headers: new Headers({
-            'Content-Type': 'application/json',
-            'Authorization': props.sessionToken
+            "Content-Type": "application/json",
+            "Authorization": props.sessionToken,
           })
         })
         .then(() => getListItems())
-      }
-
-      const itemMapper = () => {
-        return listItems.map((item, index) => {
-          return(
-            <tr key={index}>
-              <td>{item.itemName}</td>
-              <td>{item.itemURL}</td>
-              <td>{item.imageURL}</td>
-            </tr>
-          )
+        .catch(err => {
+          console.log(err);
+          setErrForm(err);
         })
-      }
+    };
+
+      // Commented out by Nick B. because it seems to cause a bug where list items disappear on initial login, after initial render
+    // useEffect(() => {
+    //     // console.log("ListItems.js props.sessionToken", props.sessionToken);
+    //     // console.log("ListItems.js localStorage token", localStorage.getItem("token"));
+    //     getListItems();
+    // }, [props.sessionToken]);
 
     useEffect(() => {
-        // console.log("ListItems.js props.sessionToken", props.sessionToken);
-        // console.log("ListItems.js localStorage token", localStorage.getItem("token"));
-        getListItems();
-    }, [props.sessionToken]);
-
-    useEffect(() => {
-      // console.log("ListItems.js props.activeList", props.activeList);
+      console.log("ListItems.js props.activeList", props.activeList);
       getListItems();
   }, [props.activeList]);
 
     useEffect(() => {
-      // console.log("ListItems.js props.listItemsUpdated", props.listItemsUpdated);
+      console.log("ListItems.js props.listItemsUpdated", props.listItemsUpdated);
       getListItems();
       props.setListItemsUpdated(false);
   }, [props.listItemsUpdated]);
@@ -81,7 +74,7 @@ const ListItems = (props) => {
               <td>{item ? <a href={item.itemURL} target="_blank">{item.itemName}</a> : <p>{item.itemName}</p>} </td>
           <td>{item.imageURL ? <img src={item.imageURL} alt={item.itemName}/> : <img className="altImage" src={altImgURL} />}</td>
               <td>
-              <Button color="danger" onClick={() => {deleteListItem(item)}}>Delete</Button>
+              <Button color="danger" size="sm" onClick={() => {deleteListItem(item)}}>Delete</Button>
               </td>
             </tr>
           )
@@ -90,6 +83,5 @@ const ListItems = (props) => {
         
     );
 };
-// notes 
 
 export default ListItems;

@@ -8,29 +8,23 @@ import EditList from "./EditList";
 import DeleteList from "./DeleteList";
 
 const List = (props) => {
-
     const [activeTab, setActiveTab] = useState(0);
     const [errForm, setErrForm] = useState("");
     const [addList, setAddList] = useState(false);
     const [editList, setEditList] = useState(false);
     const [deleteList, setDeleteList] = useState(false)
-    const [listToEdit, setListToEdit] = useState({})
-    const [listToDelete, setListToDelete] = useState({})
     const [lists, setLists] = useState([]);
 
     const toggleTab = (tab) => {
-
-      if(activeTab !== tab) {
-        setActiveTab(tab);
+        if(activeTab !== tab) {
+          setActiveTab(tab);
+        };
       };
-
-    };
 
     const toggleId = (id) => {
         if(props.activeList !== id) {
           props.setActiveList(id);
         };
-  
       };
 
     const addOn = () => {
@@ -43,14 +37,6 @@ const List = (props) => {
 
     const deleteOn = () => {
         setDeleteList(true);
-    }
-
-    const updateListToEdit = (list) => {
-        setListToEdit(list);
-    }
-
-    const updateListToDelete = (list) => {
-        setListToDelete(list);
     }
 
     useEffect(() => {
@@ -79,16 +65,12 @@ const List = (props) => {
           // console.log("getList json", json);
           setLists(json);
           props.setActiveList(json[0].id);
-          setActiveTab(0);
         })
         .catch(err => {
           console.log(err);
           setErrForm(err);
       })
     };
-
-
-
 
     return (
         <div className="listStyle">
@@ -104,29 +86,20 @@ const List = (props) => {
                     )}) : ''}
             <NavItem>
             <NavLink className="addList" onClick={() => { addOn(); }}>
-                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL} getList={getList}/> : "Add List"}
+                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL} getList={getList}/> : null}Add List
                 </NavLink>
             </NavItem>
         </Nav>
-        {/* <TabContent activeTab={activeTab}>
-        <TabPane tabId={0}>
-            Testing 1
-        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
-        </TabPane>
-        <TabPane tabId={1}>
-            Testing 2
-        </TabPane>
-        <TabPane tabId={2}>
-            Testing 3
-        <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
-        </TabPane>
-      </TabContent> */}
+        <Container className="d-flex justify-content-end my-2">
+            <Button className="mr-3" color="primary" size="sm" onClick={() => { editOn(); }}>{(editList) ?<EditList baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} getList={getList} setEditList={setEditList}/> : null}Edit List</Button>
+            <Button className="mr-3" color="danger" size="sm" onClick={() => { deleteOn(); }}>{(deleteList) ?<DeleteList baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} getList={getList} setDeleteList={setDeleteList}/> : null}Delete List</Button>
+        </Container>
+    
         <TabContent>
         <TabPane>
           {lists.length > 0 ? <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} listItemsUpdated={props.listItemsUpdated} setListItemsUpdated={props.setListItemsUpdated} /> : ""}
         </TabPane>
         </TabContent>
-
         </div>
     );
 };
