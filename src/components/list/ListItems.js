@@ -42,7 +42,7 @@ const ListItems = (props) => {
 
       useEffect(() => {
           getListItems()
-      }, [])
+      }, [props.activeList])
 
     useEffect(() => {
         console.log("ListItems.js props.sessionToken", props.sessionToken);

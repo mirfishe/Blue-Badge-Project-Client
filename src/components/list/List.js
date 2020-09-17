@@ -100,8 +100,8 @@ const List = (props) => {
                     </NavItem>
                     )}) : ''}
             <NavItem>
-            <NavLink onClick={() => { addOn(); }}>
-                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL} getList={getList}/>: <Button color="primary" size="sm">Add List</Button>}
+            <NavLink className="addList" onClick={() => { addOn(); }}>
+                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL} getList={getList}/>: "Add List"}
                 </NavLink>
             </NavItem>
         </Nav>
