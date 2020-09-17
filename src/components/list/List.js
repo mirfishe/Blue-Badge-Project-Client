@@ -48,7 +48,7 @@ const List = (props) => {
   //   useEffect(() => {
   //       console.log("List.js props.activeList", props.activeList);
   //   }, [props.activeList]);
-    
+
     const getList = () => {
 
       let url = props.baseURL + "list/";

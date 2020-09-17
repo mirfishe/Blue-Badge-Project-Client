@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Container, Col, Row, Alert, Button, Table} from "reactstrap";
+import {Container, Col, Row, Alert, Button, Table, Card, CardTitle, CardText, Grid} from "reactstrap";
 import "./ListItems.css";
 
 const ListItems = (props) => {
@@ -64,25 +64,21 @@ const ListItems = (props) => {
   }, [props.listItemsUpdated]);
 
     return (
-        <Table>
-        {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
-         {listItems.length > 0 ? listItems.map((item, index) => {
-          return(
-            <tr className="listItems">
-              <td>{item ? <a href={item.itemURL} target="_blank">{item.itemName}</a> : <p>{item.itemName}</p>} </td>
-          <td>{item.imageURL ? <img src={item.imageURL} alt={item.itemName}/> : <img className="altImage" src={altImgURL} />}</td>
-              <td>
-              <Button color="danger" size="sm" onClick={() => {deleteListItem(item)}}>Delete</Button>
-              </td>
-            </tr>
-          )
-        }) : 
-        <><img className="emptyItems" src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg" alt="Add Games"/>
-           <p className="emptyItems">Add Games to your List to see them here.</p>
-           </>
-        }
-        </Table>
-        
+          <Row>
+          {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
+           {listItems.length > 0 ? listItems.map((item, index) => {
+            return(
+              <Card body className="text-center" id="listItems">
+                <CardText>{item ? <a href={item.itemURL} target="_blank">{item.itemName}</a> : <p>{item.itemName}</p>} </CardText>
+            <CardText>{item.imageURL ? <img src={item.imageURL} alt={item.itemName}/> : <img className="altImage" src={altImgURL} />}</CardText>
+                <Button color="danger" size="sm"  onClick={() => {deleteListItem(item)}}>Delete</Button>
+              </Card>
+            )
+          }) : <><img className="emptyItems" src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg" alt="Add Games"/>
+          <p className="emptyItems">Add Games to your List to see them here.</p>
+          </>
+       }
+          </Row>
     );
 };
 
