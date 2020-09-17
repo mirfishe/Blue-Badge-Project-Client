@@ -35,15 +35,16 @@ const ListItems = (props) => {
         fetch(`${props.baseURL}item/delete/${item.id}`, {
           method: 'DELETE',
           headers: new Headers({
-            'Content-Type': 'application/json',
-            'Authorization': props.sessionToken
+            "Content-Type": "application/json",
+            "Authorization": props.sessionToken,
           })
+        })
         .then(() => getListItems())
         .catch(err => {
           console.log(err);
           setErrForm(err);
-      })
-      })};
+        })
+    };
 
       // Commented out by Nick B. because it seems to cause a bug where list items disappear on initial login, after initial render
     // useEffect(() => {
@@ -53,12 +54,12 @@ const ListItems = (props) => {
     // }, [props.sessionToken]);
 
     useEffect(() => {
-      // console.log("ListItems.js props.activeList", props.activeList);
+      console.log("ListItems.js props.activeList", props.activeList);
       getListItems();
   }, [props.activeList]);
 
     useEffect(() => {
-      // console.log("ListItems.js props.listItemsUpdated", props.listItemsUpdated);
+      console.log("ListItems.js props.listItemsUpdated", props.listItemsUpdated);
       getListItems();
       props.setListItemsUpdated(false);
   }, [props.listItemsUpdated]);

@@ -29,18 +29,6 @@ function App() {
   //   };
   // }, []);
 
-  useEffect(() => {
-      // console.log("App.js sessionToken", sessionToken); // Never shows the current value of sessionToken
-
-      if (sessionToken === null || sessionToken === undefined ) {
-        setActiveList(0);
-        setListItemsUpdated(false);
-      } else {
-        setListItemsUpdated(true);
-      };
-
-  }, [sessionToken]);
-
   // const updateToken = (newToken) => {
   //   localStorage.setItem("token", newToken);
   //   // setSessionToken(newToken);
@@ -56,6 +44,28 @@ function App() {
   //   // console.log("App.js sessionToken", sessionToken); // Never shows the current value of sessionToken
   //   console.log("User logged out.");
   // };
+
+  useEffect(() => {
+    // console.log("App.js sessionToken", sessionToken); // Never shows the current value of sessionToken
+
+    if (sessionToken === null || sessionToken === undefined) {
+      setActiveList(0);
+      setListItemsUpdated(false);
+      console.log("App.js activeList", activeList);
+      console.log("App.js listItemsUpdated", listItemsUpdated);
+    } else {
+      setListItemsUpdated(true);
+    };
+
+  }, [sessionToken]);
+
+  useEffect(() => {
+    console.log("App.js activeList", activeList);
+  }, [activeList]);
+
+  useEffect(() => {
+    console.log("App.js listItemsUpdated", listItemsUpdated);
+  }, [listItemsUpdated]);
 
   return (
     <div>
