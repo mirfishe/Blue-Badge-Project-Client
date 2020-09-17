@@ -61,18 +61,18 @@ const ListItems = (props) => {
   }, [props.listItemsUpdated]);
 
     return (
-        <div>
+        <Table>
         {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
          {listItems.length > 0 ? listItems.map((item, index) => {
           return(
-            <div className="listItems">
+            <tr className="listItems">
               <td><img src={item.imageURL} alt={item.itemName}/></td>
               {/* <td><a href={item.itemURL} target="_blank">{item.itemName}</a></td> */}
               {item ? <a href={item.itemURL} target="_blank">{item.itemName}</a> : <div>{item.itemName}</div>}
-            </div>
+            </tr>
           )
         }) : ""}
-        </div>
+        </Table>
         
     );
 };
