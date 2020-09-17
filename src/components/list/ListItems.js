@@ -71,9 +71,7 @@ const ListItems = (props) => {
               <Card body className="text-center" id="listItems">
                 <CardText>{item ? <a href={item.itemURL} target="_blank">{item.itemName}</a> : <p>{item.itemName}</p>} </CardText>
             <CardText>{item.imageURL ? <img src={item.imageURL} alt={item.itemName}/> : <img className="altImage" src={altImgURL} />}</CardText>
-                <td>
                 <Button color="danger" size="sm"  onClick={() => {deleteListItem(item)}}>Delete</Button>
-                </td>
               </Card>
             )
           }) : <><img className="emptyItems" src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg" alt="Add Games"/>
