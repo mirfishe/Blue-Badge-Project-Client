@@ -9,21 +9,12 @@ import DeleteList from "./DeleteList";
 
 const List = (props) => {
 
-    const [activeTab, setActiveTab] = useState(0);
     const [addList, setAddList] = useState(false);
     const [editList, setEditList] = useState(false);
     const [deleteList, setDeleteList] = useState(false)
     const [listToEdit, setListToEdit] = useState({})
     const [listToDelete, setListToDelete] = useState({})
     const [lists, setLists] = useState([]);
-
-    const toggleTab = (tab) => {
-
-      if(activeTab !== tab) {
-        setActiveTab(tab);
-      };
-
-    };
 
     const toggleId = (id) => {
         if(props.activeList !== id) {
@@ -81,7 +72,6 @@ const List = (props) => {
           // console.log("getList json", json);
           setLists(json);
           props.setActiveList(json[0].id);
-          setActiveTab(0);
         })
         .catch((err) => console.log(err));
     };
@@ -95,7 +85,7 @@ const List = (props) => {
                 {lists.length > 0 ? lists.map((lists, index) => {
                     return(
                     <NavItem key={index}>
-                     <NavLink className={classnames({ active: activeTab === index })} index={index} onClick={() => { toggleTab(index); toggleId(lists.id)  }}>
+                     <NavLink onClick={() => {toggleId(lists.id)}}>
                          {lists.listName}
                      </NavLink>
                     </NavItem>
