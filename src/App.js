@@ -51,21 +51,21 @@ function App() {
     if (sessionToken === null || sessionToken === undefined) {
       setActiveList(0);
       setListItemsUpdated(false);
-      console.log("App.js activeList", activeList);
-      console.log("App.js listItemsUpdated", listItemsUpdated);
+      // console.log("App.js activeList", activeList);
+      // console.log("App.js listItemsUpdated", listItemsUpdated);
     } else {
       setListItemsUpdated(true);
     };
 
   }, [sessionToken]);
 
-  useEffect(() => {
-    console.log("App.js activeList", activeList);
-  }, [activeList]);
+  // useEffect(() => {
+  //   console.log("App.js activeList", activeList);
+  // }, [activeList]);
 
-  useEffect(() => {
-    console.log("App.js listItemsUpdated", listItemsUpdated);
-  }, [listItemsUpdated]);
+  // useEffect(() => {
+  //   console.log("App.js listItemsUpdated", listItemsUpdated);
+  // }, [listItemsUpdated]);
 
   return (
     <div>

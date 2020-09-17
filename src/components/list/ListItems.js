@@ -47,20 +47,18 @@ const ListItems = (props) => {
         })
     };
 
-      // Commented out by Nick B. because it seems to cause a bug where list items disappear on initial login, after initial render
     // useEffect(() => {
-    //     // console.log("ListItems.js props.sessionToken", props.sessionToken);
+    //     console.log("ListItems.js props.sessionToken", props.sessionToken);
     //     // console.log("ListItems.js localStorage token", localStorage.getItem("token"));
-    //     getListItems();
     // }, [props.sessionToken]);
 
     useEffect(() => {
-      console.log("ListItems.js props.activeList", props.activeList);
+      // console.log("ListItems.js props.activeList", props.activeList);
       getListItems();
   }, [props.activeList]);
 
     useEffect(() => {
-      console.log("ListItems.js props.listItemsUpdated", props.listItemsUpdated);
+      // console.log("ListItems.js props.listItemsUpdated", props.listItemsUpdated);
       getListItems();
       props.setListItemsUpdated(false);
   }, [props.listItemsUpdated]);
