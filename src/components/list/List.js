@@ -91,7 +91,7 @@ const List = (props) => {
 
 
     return (
-        <div>
+        <div className="listStyle">
           {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
             <Nav tabs>
                 {lists.length > 0 ? lists.map((lists, index) => {
