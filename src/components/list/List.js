@@ -49,10 +49,6 @@ const List = (props) => {
   //       console.log("List.js props.activeList", props.activeList);
   //   }, [props.activeList]);
 
-  //Testing a color picker for the border because I am indecisive
-
-
-
     const getList = () => {
 
       let url = props.baseURL + "list/";
