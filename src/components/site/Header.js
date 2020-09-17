@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Container, Col, Row, Nav, NavbarBrand, NavbarText} from "reactstrap";
+import {Container, Col, Row, Nav, Navbar, NavItem, NavbarBrand, NavbarText} from "reactstrap";
 import "./Header.css";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
@@ -18,15 +18,22 @@ const Header = (props) => {
     }, [props.sessionToken]);
 
     return (
-            <Nav>
-                <NavbarBrand>Logo</NavbarBrand>
-                {/* {props.sessionToken === undefined ? <Login baseURL={props.baseURL} updateToken={props.updateToken} /> : ""}
-                {props.sessionToken === undefined ? <Register baseURL={props.baseURL} updateToken={props.updateToken} /> : ""}
-                {props.sessionToken !== undefined ? <Logout clearToken={props.clearToken} /> : ""} */}
-                {props.sessionToken === null || props.sessionToken === undefined ? <Login baseURL={props.baseURL} setSessionToken={props.setSessionToken} /* updateToken={props.updateToken} */ /> : ""}
-                {props.sessionToken === null || props.sessionToken === undefined ? <Register baseURL={props.baseURL} setSessionToken={props.setSessionToken} /* updateToken={props.updateToken} */ /> : ""}
-                {props.sessionToken !== null && props.sessionToken !== undefined ? <Logout setSessionToken={props.setSessionToken} /* clearToken={props.clearToken} */ /> : ""}
-            </Nav>
+        <Navbar className="header">
+            <NavbarBrand>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Wario_emblem.svg" width="40" height="40" alt=""/>
+            </NavbarBrand>
+                 <Nav className="headerNav">
+                    <NavItem>
+                        {props.sessionToken === null || props.sessionToken === undefined ? <Login baseURL={props.baseURL} setSessionToken={props.setSessionToken} /* updateToken={props.updateToken} */ /> : ""}
+                    </NavItem>
+                    <NavItem>
+                        {props.sessionToken === null || props.sessionToken === undefined ? <Register baseURL={props.baseURL} setSessionToken={props.setSessionToken} /* updateToken={props.updateToken} */ /> : ""}
+                    </NavItem>
+                    <NavItem>
+                        {props.sessionToken !== null && props.sessionToken !== undefined ? <Logout setSessionToken={props.setSessionToken} /* clearToken={props.clearToken} */ /> : ""}
+                    </NavItem>
+                 </Nav>
+        </Navbar>
     );
 };
 
