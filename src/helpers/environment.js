@@ -7,6 +7,9 @@ switch (window.location.hostname) {
     case "tw-blue-badge-server":
         API_URL = "https://tw-blue-badge-server";
         break;
+    case "tw-gaming-application.herokuapp.com":
+        API_URL = "https://tw-blue-badge-server";
+        break;
     default:
         API_URL = `http://localhost:${process.env.REACT_APP_SERVER_PORT}`;
 };
