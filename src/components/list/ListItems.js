@@ -57,18 +57,18 @@ const ListItems = (props) => {
         //     {/* <Button color="danger" onClick={() => {deleteListItem(listItem)}}>Delete</Button> */}
         //     </Col>
         // </Row>
-        <Table>
+        <div>
           {/* {itemMapper()} */}
          {listItems.length > 0 ? listItems.map((item, index) => {
           return(
-            <tr key={index}>
-              <td>{item.itemName}</td>
-              <td><a href={item.itemURL} target="_blank">{item.itemName}</a></td>
+            <div className="listItems">
               <td><img src={item.imageURL} alt={item.itemName}/></td>
-            </tr>
+              {/* <td><a href={item.itemURL} target="_blank">{item.itemName}</a></td> */}
+              {item ? <a href={item.itemURL} target="_blank">{item.itemName}</a> : <div>{item.itemName}</div>}
+            </div>
           )
         }) : ""}
-        </Table>
+        </div>
         
     );
 };
