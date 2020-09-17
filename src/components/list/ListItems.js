@@ -23,6 +23,17 @@ const ListItems = (props) => {
           .catch((err) => console.log(err));
       };
 
+      const deleteListItem = (item) => {
+        fetch(`url${item.id}`, {
+          method: 'DELETE',
+          headers: new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': props.sessionToken
+          })
+        })
+        .then(() => props.getListItems())
+      }
+
       const itemMapper = () => {
         return listItems.map((item, index) => {
           return(
@@ -44,36 +55,11 @@ const ListItems = (props) => {
         // console.log("ListItems.js localStorage token", localStorage.getItem("token"));
     }, [props.sessionToken]);
 
-<<<<<<< HEAD
-    // return props.itemlist.map((itemlist, index) => {
-    // return (
-    //     <Row>
-    //         <Col>List Items
-    //         <tr>
-    //         <td scope="row">{listitem.id}</td>
-    //         <td>{listitem}</td>
-    //         <td>{listitem}</td>
-    //         <td>{listitem}</td>
-    //         <td>{listitem}</td>
-    //         {/* {button to move items?} */}
-    //         {/* <Button color="danger" onClick={() => {deleteListItem(listItem)}}>Delete</Button> */}
-    //         </tr>
-    //         </Col>
-    //     </Row>
-    // );
-    // })
-=======
     useEffect(() => {
         console.log("ListItems.js props.activeList", props.activeList);
     }, [props.activeList]);
 
     return (
-        // <Row>
-        //     <Col>List Items
-        //     {/* {getListItems()} */}
-        //     {/* <Button color="danger" onClick={() => {deleteListItem(listItem)}}>Delete</Button> */}
-        //     </Col>
-        // </Row>
         <Table>
           {/* {itemMapper()} */}
          {listItems.map((item, index) => {
@@ -82,13 +68,16 @@ const ListItems = (props) => {
               <td>{item.itemName}</td>
               <td>{item.itemURL}</td>
               <td>{item.imageURL}</td>
+                <td>
+                {getListItems()}
+                <Button color="danger" onClick={() => {deleteListItem(item)}}>Delete</Button>
+                </td>
             </tr>
           )
         })}
         </Table>
         
     );
->>>>>>> 643572ac017fee4cf30de69436a3e3c017cb1c0e
 };
 // notes 
 
