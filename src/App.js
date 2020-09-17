@@ -73,6 +73,7 @@ function App() {
 <Container>
       <Row>
       <Col md="6">
+        {window.location.hostname}
       <Search baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} setListItemsUpdated={setListItemsUpdated} />
       </Col>
       <Col md="6">
