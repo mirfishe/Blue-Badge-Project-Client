@@ -63,8 +63,8 @@ const ListItems = (props) => {
           return(
             <tr key={index}>
               <td>{item.itemName}</td>
-              <td>{item.itemURL}</td>
-              <td>{item.imageURL}</td>
+              <td><a href={item.itemURL} target="_blank">{item.itemName}</a></td>
+              <td><img src={item.imageURL} alt={item.itemName}/></td>
             </tr>
           )
         }) : ""}
