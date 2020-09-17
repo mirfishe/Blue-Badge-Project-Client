@@ -5,6 +5,7 @@ import "./ListItems.css";
 const ListItems = (props) => {
     const [listItems, setListItems] = useState([]);
     const [errForm, setErrForm] = useState("");
+    const altImgURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/No_image_available_600_x_450.svg/1280px-No_image_available_600_x_450.svg.png";
 
     const getListItems = () => {
         let url = props.baseURL + "list/" + props.activeList;
@@ -69,9 +70,9 @@ const ListItems = (props) => {
         {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
          {listItems.length > 0 ? listItems.map((item, index) => {
           return(
-            <tr key={index}>
-              <td><img src={item.imageURL} alt={item.itemName}/></td>
-              <td><a href={item.itemURL} target="_blank">{item.itemName}</a></td>
+            <tr className="listItems">
+              <td>{item ? <a href={item.itemURL} target="_blank">{item.itemName}</a> : <p>{item.itemName}</p>} </td>
+          <td>{item.imageURL ? <img src={item.imageURL} alt={item.itemName}/> : <img className="altImage" src={altImgURL} />}</td>
               <td>
               <Button color="danger" size="sm" onClick={() => {deleteListItem(item)}}>Delete</Button>
               </td>
