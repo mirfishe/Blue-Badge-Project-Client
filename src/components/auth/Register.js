@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {Container, Col, Row, Alert, Form, Button, FormGroup, Input, Label, Modal, ModalBody, ModalHeader, ModalFooter} from "reactstrap";
 
-const Login = (props) => {
+const Register = (props) => {
 
     const [modal, setModal] = useState(false);
     const toggle = () => {
@@ -17,9 +17,9 @@ const Login = (props) => {
     };
 
     // useEffect(() => {
-    //     console.log("Login.js modal", modal);
+    //     console.log("Register.js modal", modal);
     // }, [modal]);
-
+    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -29,11 +29,11 @@ const Login = (props) => {
 
     const onKeyDown = (e) => {
         if (e.key === 'Enter') {
-          {logIn(e)};
+          {register(e)};
         }
       };
 
-    const logIn = (e) => {
+    const register = (e) => {
         e.preventDefault();
 
         setErrForm("");
@@ -88,10 +88,10 @@ const Login = (props) => {
                 email:  email.trim(),
                 password:  password.trim()
             };
-            // console.log("Login.js userObject", userObject);
+            // console.log("Register.js userObject", userObject);
 
-            let URL = props.baseURL + "user/login";
-            // console.log("Login.js URL", URL);
+            let URL = props.baseURL + "user/register";
+                // console.log("Register.js URL", URL);
 
             fetch(URL, {
                 method: "POST",
@@ -102,9 +102,9 @@ const Login = (props) => {
             })
             .then(res => {
 
-                // console.log("Login.js response", res);
-                // console.log("Login.js response.status", res.status);
-                // console.log("Login.js response.statusText", res.statusText);
+                // console.log("Register.js response", res);
+                // console.log("Register.js response.status", res.status);
+                // console.log("Register.js response.statusText", res.statusText);
 
                 if (res.status === 200) {
                     return res.json();
@@ -115,14 +115,14 @@ const Login = (props) => {
             })
             .then(json => {
 
-                if (json !== 500 && json !== 401) {
+                if (json !== 500) {
                     props.setSessionToken(json.sessionToken);
-                    // console.log("Login.js user", json);
-                    // console.log("Login.js json.sessionToken", json.sessionToken);
+                    // console.log("Register.js user", json);
+                    // console.log("Register.js json.sessionToken", json.sessionToken);
                     toggle();
                 } else {
-                    // console.log("Login.js error", json);
-                    setErrForm("Login failed.");
+                    // console.log("Register.js error", json);
+                    setErrForm("Registration failed.");
                 };
 
             })
@@ -135,18 +135,18 @@ const Login = (props) => {
     };
 
     // useEffect(() => {
-    //     console.log("Login.js props.sessionToken", props.sessionToken);
-    //     // console.log("Login.js localStorage token", localStorage.getItem("token"));
+    //     console.log("Register.js props.sessionToken", props.sessionToken);
+    //     // console.log("Register.js localStorage token", localStorage.getItem("token"));
     // }, [props.sessionToken]);
 
     return (
         <div className="m-2">
-        <Button color="success"  onClick={toggle}>Log In</Button>
-        <Modal isOpen={modal} toggle={toggle} onKeyDown={onKeyDown}>
-        <ModalHeader>Log In</ModalHeader>
+        <Button color="secondary" onClick={toggle}>Register</Button>
+        <Modal isOpen={modal} toggle={toggle} >
+        <ModalHeader>Register</ModalHeader>
         <ModalBody>
         {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
-        <Form onSubmit={logIn}>
+        <Form onSubmit={register} onKeyDown={onKeyDown}>
             <FormGroup>
                 <Label for="txtEmail">Email Address</Label>
                 <Input type="text" id="txtEmail" placeholder="Email Address" value={email} onChange={(e) => {/*console.log(e.target.value); */setEmail(e.target.value);}} />
@@ -160,7 +160,7 @@ const Login = (props) => {
         </Form>
         </ModalBody>
         <ModalFooter>
-            <Button type="submit" color="primary" onClick={logIn}>Log In</Button>
+            <Button type="submit" color="primary" onClick={register}>Register</Button>
             <Button outline type="submit" color="secondary" onClick={toggle}>Cancel</Button>
         </ModalFooter>
         </Modal>
@@ -168,4 +168,4 @@ const Login = (props) => {
     );
 };
 
-export default Login;
+export default Register;

@@ -1,0 +1,10 @@
+.addList {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.listStyle{
+    border: 3px solid red;
+    padding: 15px;
+    border-radius: 10px;
+}
