@@ -33,8 +33,8 @@ const Register = (props) => {
         }
       };
 
-    const register = (event) => {
-        event.preventDefault();
+    const register = (e) => {
+        e.preventDefault();
 
         setErrForm("");
 
@@ -102,9 +102,9 @@ const Register = (props) => {
             })
             .then(res => {
 
-                console.log("Register.js response", res);
-                console.log("Register.js response.status", res.status);
-                console.log("Register.js response.statusText", res.statusText);
+                // console.log("Register.js response", res);
+                // console.log("Register.js response.status", res.status);
+                // console.log("Register.js response.statusText", res.statusText);
 
                 if (res.status === 200) {
                     return res.json();
@@ -117,24 +117,27 @@ const Register = (props) => {
 
                 if (json !== 500) {
                     props.setSessionToken(json.sessionToken);
-                    console.log("Register.js USER", json);
-                    console.log("Register.js json.sessionToken", json.sessionToken);
+                    // console.log("Register.js user", json);
+                    // console.log("Register.js json.sessionToken", json.sessionToken);
                     toggle();
                 } else {
-                    console.log("Register.js ERROR", json);
+                    // console.log("Register.js error", json);
                     setErrForm("Registration failed.");
                 };
 
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+                setErrForm(err);
+            })
 
         };
     };
 
-    useEffect(() => {
-        console.log("Register.js props.sessionToken", props.sessionToken);
-        // console.log("Register.js localStorage token", localStorage.getItem("token"));
-    }, [props.sessionToken]);
+    // useEffect(() => {
+    //     console.log("Register.js props.sessionToken", props.sessionToken);
+    //     // console.log("Register.js localStorage token", localStorage.getItem("token"));
+    // }, [props.sessionToken]);
 
     return (
         <div className="m-2">

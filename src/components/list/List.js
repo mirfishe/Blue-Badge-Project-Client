@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Container, Col, Row, Nav, NavItem, NavLink, TabContent, TabPane, Button} from "reactstrap";
+import {Container, Col, Row, Alert, Button, Nav, NavItem, NavLink, TabContent, TabPane} from "reactstrap";
 import "./List.css";
 import classnames from "classnames";
 import ListItems from "./ListItems";
@@ -9,6 +9,7 @@ import DeleteList from "./DeleteList";
 
 const List = (props) => {
     const [activeTab, setActiveTab] = useState(0);
+    const [errForm, setErrForm] = useState("");
     const [addList, setAddList] = useState(false);
     const [editList, setEditList] = useState(false);
     const [deleteList, setDeleteList] = useState(false)
@@ -39,21 +40,18 @@ const List = (props) => {
     }
 
     useEffect(() => {
-        getList();
-    },[props.sessionToken])
-
-    useEffect(() => {
-      console.log("List.js props.sessionToken", props.sessionToken);
+      // console.log("List.js props.sessionToken", props.sessionToken);
       // console.log("List.js localStorage token", localStorage.getItem("token"));
+      getList();
   }, [props.sessionToken]);
 
-    useEffect(() => {
-        console.log("List.js props.activeList", props.activeList);
-    }, [props.activeList]);
+  //   useEffect(() => {
+  //       console.log("List.js props.activeList", props.activeList);
+  //   }, [props.activeList]);
     
     const getList = () => {
 
-        let url = props.baseURL + "list/";
+      let url = props.baseURL + "list/";
 
       fetch(url, {
         method: "GET",
@@ -68,11 +66,15 @@ const List = (props) => {
           setLists(json);
           props.setActiveList(json[0].id);
         })
-        .catch((err) => console.log(err));
+        .catch(err => {
+          console.log(err);
+          setErrForm(err);
+      })
     };
 
     return (
         <div>
+          {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
             <Nav tabs>
                 {lists.length > 0 ? lists.map((lists, index) => {
                     return(
@@ -88,14 +90,14 @@ const List = (props) => {
                 </NavLink>
             </NavItem>
         </Nav>
-        <Container className="d-flex justify-content-center my-2">
+        <Container className="d-flex justify-content-end my-2">
             <Button className="mr-3" color="primary" size="sm" onClick={() => { editOn(); }}>{(editList) ?<EditList baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} getList={getList} setEditList={setEditList}/> : null}Edit List</Button>
             <Button className="mr-3" color="danger" size="sm" onClick={() => { deleteOn(); }}>{(deleteList) ?<DeleteList baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} getList={getList} setDeleteList={setDeleteList}/> : null}Delete List</Button>
         </Container>
     
         <TabContent>
         <TabPane>
-          {lists.length > 0 ? <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} /> : ""}
+          {lists.length > 0 ? <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} listItemsUpdated={props.listItemsUpdated} setListItemsUpdated={props.setListItemsUpdated} /> : ""}
         </TabPane>
         </TabContent>
         </div>

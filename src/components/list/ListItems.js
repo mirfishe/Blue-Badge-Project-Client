@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from "react";
-import {Container, Col, Row, Button, Table} from "reactstrap";
+import {Container, Col, Row, Alert, Button, Table} from "reactstrap";
 import "./ListItems.css";
 
 const ListItems = (props) => {
     const [listItems, setListItems] = useState([]);
+    const [errForm, setErrForm] = useState("");
 
     const getListItems = () => {
         let url = props.baseURL + "list/" + props.activeList;
-        console.log("ListItems.js url", url);
+        // console.log("ListItems.js url", url);
 
         fetch(url, {
           method: "GET",
@@ -17,54 +18,62 @@ const ListItems = (props) => {
           }),
         })
           .then(res => {
-              
-            console.log("ListItems.js response", res);
+            // console.log("ListItems.js response", res);
             return res.json();
           })
           .then((json) => {
-            console.log("getListItem json", json);
+            // console.log("getListItem json", json);
             setListItems(json);
           })
-          .catch((err) => console.log(err));
+          .catch(err => {
+            console.log(err);
+            setErrForm(err);
+        })
       };
 
-      const itemMapper = () => {
-        return listItems.map((item, index) => {
-          return(
-            <tr key={index}>
-              <td>{item.itemName}</td>
-              <td>{item.itemURL}</td>
-              <td>{item.imageURL}</td>
-            </tr>
-          )
-        })
-      }
+      const deleteListItem = (item) => {
+        fetch(`${props.baseURL}item/delete/${item.id}`, {
+          method: 'DELETE',
+          headers: new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': props.sessionToken
+          })
+        .then(() => getListItems())
+        .catch(err => {
+          console.log(err);
+          setErrForm(err);
+      })
+      })};
+
+      // Commented out by Nick B. because it seems to cause a bug where list items disappear on initial login, after initial render
+    // useEffect(() => {
+    //     // console.log("ListItems.js props.sessionToken", props.sessionToken);
+    //     // console.log("ListItems.js localStorage token", localStorage.getItem("token"));
+    //     getListItems();
+    // }, [props.sessionToken]);
 
     useEffect(() => {
-        console.log("ListItems.js props.sessionToken", props.sessionToken);
-        // console.log("ListItems.js localStorage token", localStorage.getItem("token"));
-    }, [props.sessionToken]);
+      // console.log("ListItems.js props.activeList", props.activeList);
+      getListItems();
+  }, [props.activeList]);
 
     useEffect(() => {
-        console.log("ListItems.js props.activeList", props.activeList);
-        getListItems();
-    }, [props.activeList]);
+      // console.log("ListItems.js props.listItemsUpdated", props.listItemsUpdated);
+      getListItems();
+      props.setListItemsUpdated(false);
+  }, [props.listItemsUpdated]);
 
     return (
-        // <Row>
-        //     <Col>List Items
-        //     {/* {getListItems()} */}
-        //     {/* <Button color="danger" onClick={() => {deleteListItem(listItem)}}>Delete</Button> */}
-        //     </Col>
-        // </Row>
         <Table>
-          {/* {itemMapper()} */}
+        {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
          {listItems.length > 0 ? listItems.map((item, index) => {
           return(
             <tr key={index}>
-              <td>{item.itemName}</td>
-              <td><a href={item.itemURL} target="_blank">{item.itemName}</a></td>
               <td><img src={item.imageURL} alt={item.itemName}/></td>
+              <td><a href={item.itemURL} target="_blank">{item.itemName}</a></td>
+              <td>
+              <Button color="danger" size="sm" onClick={() => {deleteListItem(item)}}>Delete</Button>
+              </td>
             </tr>
           )
         }) : ""}
@@ -72,6 +81,5 @@ const ListItems = (props) => {
         
     );
 };
-// notes 
 
 export default ListItems;
