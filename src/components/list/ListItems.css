@@ -11,8 +11,9 @@
 
 .emptyItems {
     max-width: 50%;
+    max-height: 10em;
     display: block;
     margin: auto;
     text-align: center;
-    color: white;
+    color: rgb(80, 80, 80);
 }
