@@ -1,11 +1,18 @@
-.listItems{
-    display: flex;
-    flex-wrap: wrap;
+#listItems{
     display: inline-block;
-    margin-top: 2px;
-    padding: 10px;
+    margin: 8px;
+    padding: 8px;
+    width: 15em;
 }
 
 .altImage{
     width: 8em;
+}
+
+.emptyItems {
+    max-width: 50%;
+    display: block;
+    margin: auto;
+    text-align: center;
+    color: white;
 }

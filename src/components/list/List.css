@@ -1,10 +1,14 @@
-.addList {
-    background-color: #007bff;
-    color: #fff;
+.nav-tabs .addList {
+    border-top: 1px solid #007bff;
+    border-left: 1px solid #007bff;
+    border-right: 1px solid #007bff;
+    color: #007bff;
+    font-weight: bold;
 }
 
 .listStyle{
-    border: 3px solid red;
+    border: 3px solid rgb(14, 85, 250);
     padding: 15px;
     border-radius: 10px;
+    margin-bottom: 1em;
 }
