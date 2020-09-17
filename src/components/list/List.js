@@ -81,14 +81,15 @@ const List = (props) => {
                 {lists.length > 0 ? lists.map((lists, index) => {
                     return(
                     <NavItem key={index}>
-                     <NavLink className={classnames({ active: activeTab === index })} index={index} onClick={() => { toggleTab(index); toggleId(lists.id)  }}>
+                     <NavLink id="userList" className={classnames({ active: activeTab === index })} index={index} onClick={() => { toggleTab(index); toggleId(lists.id)  }}>
                          {lists.listName}
                      </NavLink>
                     </NavItem>
                     )}) : ''}
             <NavItem>
             <NavLink className="addList" onClick={() => { addOn(); }}>
-                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL} getList={getList}/> : null}Add List
+                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL} getList={getList}/> : null}<img src="https://pngimage.net/wp-content/uploads/2018/05/add-button-png-5.png" alt="New List" width="30" height="30"/>
+
                 </NavLink>
             </NavItem>
         </Nav>
