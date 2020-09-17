@@ -52,6 +52,19 @@ const List = (props) => {
     const updateListToDelete = (list) => {
         setListToDelete(list);
     }
+
+    useEffect(() => {
+        getList();
+    },[props.sessionToken])
+
+    useEffect(() => {
+      console.log("List.js props.sessionToken", props.sessionToken);
+      // console.log("List.js localStorage token", localStorage.getItem("token"));
+  }, [props.sessionToken]);
+
+    useEffect(() => {
+        console.log("List.js props.activeList", props.activeList);
+    }, [props.activeList]);
     
     const getList = () => {
 
@@ -74,18 +87,7 @@ const List = (props) => {
         .catch((err) => console.log(err));
     };
 
-    useEffect(() => {
-        getList();
-    },[props.sessionToken])
 
-    useEffect(() => {
-      console.log("List.js props.sessionToken", props.sessionToken);
-      // console.log("List.js localStorage token", localStorage.getItem("token"));
-  }, [props.sessionToken]);
-
-    useEffect(() => {
-        console.log("List.js props.activeList", props.activeList);
-    }, [props.activeList]);
     
 
     return (
@@ -101,7 +103,7 @@ const List = (props) => {
                     )}) : ''}
             <NavItem>
             <NavLink className="addList" onClick={() => { addOn(); }}>
-                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL} getList={getList}/>: "Add List"}
+                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL} getList={getList}/> : "Add List"}
                 </NavLink>
             </NavItem>
         </Nav>

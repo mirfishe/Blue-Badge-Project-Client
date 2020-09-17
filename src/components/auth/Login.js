@@ -27,6 +27,12 @@ const Login = (props) => {
     const [errPassword, setErrPassword] = useState("");
     const [errForm, setErrForm] = useState("");
 
+    const onKeyDown = (e) => {
+        if (e.key === 'Enter') {
+          {logIn(e)};
+        }
+      };
+
     const logIn = (event) => {
         event.preventDefault();
 
@@ -133,7 +139,7 @@ const Login = (props) => {
     return (
         <div className="m-2">
         <Button color="success" size="sm" onClick={toggle}>Log In</Button>
-        <Modal isOpen={modal} toggle={toggle} >
+        <Modal isOpen={modal} toggle={toggle} onKeyDown={onKeyDown}>
         <ModalHeader>Log In</ModalHeader>
         <ModalBody>
         {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
