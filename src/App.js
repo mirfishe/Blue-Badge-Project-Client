@@ -79,10 +79,9 @@ function App() {
       </Col>
       <Col md="6">
         <div class="cardBack">
-
       {sessionToken !== null && sessionToken !== undefined ? <List baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} setActiveList={setActiveList} listItemsUpdated={listItemsUpdated} setListItemsUpdated={setListItemsUpdated} /> : 
         <><img className="emptyState" src="https://www.onlineverdan.com/wp-content/plugins/ajax-login-and-registration-modal-popup/assets/img/login.svg" alt="login to see lists"/>
-        <p className="emptyState">Login to see your lists here.</p>
+        <p className="emptyState">Please login to see your lists.</p>
         </>
         }
         </div>

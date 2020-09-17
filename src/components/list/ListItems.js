@@ -74,10 +74,10 @@ const ListItems = (props) => {
                 <Button color="danger" size="sm"  onClick={() => {deleteListItem(item)}}>Delete</Button>
               </Card>
             )
-          }) : <><img className="emptyItems" src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg" alt="Add Games"/>
-          <p className="emptyItems">Add Games to your List to see them here.</p>
-          </>
-       }
+          }) : 
+          <><img className="emptyItems" src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg" alt="Add Games"/>
+          <p className="emptyItems">Add items to your list to see them here.</p>
+          </>}
           </Row>
     );
 };

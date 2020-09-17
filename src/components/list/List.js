@@ -64,7 +64,7 @@ const List = (props) => {
         .then((json) => {
           // console.log("getList json", json);
           setLists(json);
-          if (!addList) {
+          if (!addList && lists.length > 0) {
             props.setActiveList(json[0].id);
           }
         })
@@ -93,14 +93,19 @@ const List = (props) => {
                 </NavLink>
             </NavItem>
         </Nav>
+        {lists.length > 0 ? 
         <Container className="d-flex justify-content-end my-2">
             <Button className="mr-3" color="primary" size="sm" onClick={() => { editOn(); }}>{(editList) ?<EditList baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} getList={getList} setEditList={setEditList}/> : null}Edit List</Button>
             <Button className="mr-3" color="danger" size="sm" onClick={() => { deleteOn(); }}>{(deleteList) ?<DeleteList baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} getList={getList} setDeleteList={setDeleteList}/> : null}Delete List</Button>
         </Container>
-    
+        : ""}
         <TabContent>
         <TabPane>
-          {lists.length > 0 ? <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} listItemsUpdated={props.listItemsUpdated} setListItemsUpdated={props.setListItemsUpdated} /> : ""}
+          {lists.length > 0 ? <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} listItemsUpdated={props.listItemsUpdated} setListItemsUpdated={props.setListItemsUpdated} />
+          :
+          <><img className="emptyItems" src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg" alt="Add Games"/>
+          <p className="emptyItems">Create a list to add items.</p>
+          </>}
         </TabPane>
         </TabContent>
         </div>
