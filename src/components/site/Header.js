@@ -12,10 +12,10 @@ const Header = (props) => {
 
     // const [headerSessionToken, setHeaderSessionToken] = useState(props.sessionToken);
 
-    useEffect(() => {
-        console.log("Header.js props.sessionToken", props.sessionToken);
-        // console.log("Header.js localStorage token", localStorage.getItem("token"));
-    }, [props.sessionToken]);
+    // useEffect(() => {
+    //     console.log("Header.js props.sessionToken", props.sessionToken);
+    //     // console.log("Header.js localStorage token", localStorage.getItem("token"));
+    // }, [props.sessionToken]);
 
     return (
         <Navbar className="header">

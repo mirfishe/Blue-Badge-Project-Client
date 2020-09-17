@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
-import {Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody} from 'reactstrap';
+import {Alert, Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody} from 'reactstrap';
 
 const CreateList = (props) => {
     const [listName, setListName] = useState('');
+    const [errForm, setErrForm] = useState("");
     const [isOpen, setIsOpen] = useState(true);
 
     const addOff = () => {
@@ -32,6 +33,10 @@ const CreateList = (props) => {
             addOff();
             // console.log(res);
         })
+        .catch(err => {
+            console.log(err);
+            setErrForm(err);
+        })
     };
 
     const handleShow = () => {
@@ -39,15 +44,16 @@ const CreateList = (props) => {
         addOff();
     };
 
-    useEffect(() => {
-        console.log("CreateList.js props.sessionToken", props.sessionToken);
-        // console.log("CreateList.js localStorage token", localStorage.getItem("token"));
-    }, [props.sessionToken]);
+    // useEffect(() => {
+    //     console.log("CreateList.js props.sessionToken", props.sessionToken);
+    //     // console.log("CreateList.js localStorage token", localStorage.getItem("token"));
+    // }, [props.sessionToken]);
 
     return (
         <Modal isOpen={isOpen} onKeyDown={onKeyDown}>
             <ModalHeader>Create New List</ModalHeader>
             <ModalBody>
+                {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
                 <Form onSubmit={newList}>
                     <FormGroup>
                         <Label htmlFor="name">List Name:</Label>
