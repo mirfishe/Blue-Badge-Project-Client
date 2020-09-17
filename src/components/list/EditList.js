@@ -21,7 +21,7 @@ const EditList = (props) => {
         }
       };
 
-    let url = `props.baseURL/list/update/${props.listToEdit.id}`;
+    let url = `${props.baseURL}list/update/${props.activeList}`;
 
     const updateList = (event) => {
         event.preventDefault();
@@ -34,7 +34,7 @@ const EditList = (props) => {
             })
         })
         .then((res) => {
-            // need to add function to re-GET lists
+            props.getList();
             editOff();
             console.log(res);
         })
@@ -56,10 +56,10 @@ const EditList = (props) => {
                 {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
                 <Form onSubmit={updateList}>
                     <FormGroup>
-                        <Label htmlFor="name">List Name:</Label>
+                        <Label htmlFor="name">New List Name:</Label>
                         <Input name="name" value={editListName} onChange={(e) => setEditListName(e.target.value)} />
                     </FormGroup>
-                    <Button className="mr-3" color="primary" disabled={!editListName} type="submit">Add List</Button>
+                    <Button className="mr-3" color="primary" disabled={!editListName} type="submit">Edit List</Button>
                     <Button outline color="secondary" onClick={handleShow}>Close</Button>
                 </Form>
             </ModalBody>

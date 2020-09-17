@@ -46,11 +46,12 @@ const ListItems = (props) => {
         })
     };
 
-    useEffect(() => {
-        // console.log("ListItems.js props.sessionToken", props.sessionToken);
-        // console.log("ListItems.js localStorage token", localStorage.getItem("token"));
-        getListItems();
-    }, [props.sessionToken]);
+      // Commented out by Nick B. because it seems to cause a bug where list items disappear on initial login, after initial render
+    // useEffect(() => {
+    //     // console.log("ListItems.js props.sessionToken", props.sessionToken);
+    //     // console.log("ListItems.js localStorage token", localStorage.getItem("token"));
+    //     getListItems();
+    // }, [props.sessionToken]);
 
     useEffect(() => {
       console.log("ListItems.js props.activeList", props.activeList);
