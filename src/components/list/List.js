@@ -119,7 +119,11 @@ const List = (props) => {
         </TabPane>
       </TabContent> */}
         {/* <ListID baseURL={props.baseURL} sessionToken={props.sessionToken} /> */}
-      {lists.length > 0 ? <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} /> : ""}
+        <TabContent>
+        <TabPane>
+          {lists.length > 0 ? <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} /> : ""}
+        </TabPane>
+        </TabContent> 
         </div>
     );
 };
