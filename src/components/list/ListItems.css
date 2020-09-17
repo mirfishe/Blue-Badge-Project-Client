@@ -8,3 +8,11 @@
 .altImage{
     width: 8em;
 }
+
+.emptyItems {
+    max-width: 50%;
+    display: block;
+    margin: auto;
+    text-align: center;
+    color: #6c757d;
+}
