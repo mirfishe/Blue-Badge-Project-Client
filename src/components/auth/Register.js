@@ -27,6 +27,12 @@ const Register = (props) => {
     const [errPassword, setErrPassword] = useState("");
     const [errForm, setErrForm] = useState("");
 
+    const onKeyDown = (e) => {
+        if (e.key === 'Enter') {
+          {register(e)};
+        }
+      };
+
     const register = (event) => {
         event.preventDefault();
 
@@ -137,7 +143,7 @@ const Register = (props) => {
         <ModalHeader>Register</ModalHeader>
         <ModalBody>
         {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
-        <Form onSubmit={register}>
+        <Form onSubmit={register} onKeyDown={onKeyDown}>
             <FormGroup>
                 <Label for="txtEmail">Email Address</Label>
                 <Input type="text" id="txtEmail" placeholder="Email Address" value={email} onChange={(e) => {/*console.log(e.target.value); */setEmail(e.target.value);}} />

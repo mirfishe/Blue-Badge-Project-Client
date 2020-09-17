@@ -9,6 +9,12 @@ const CreateList = (props) => {
         props.setAddList(false);
     };
 
+    const onKeyDown = (e) => {
+        if (e.key === 'Enter') {
+          {newList(e)};
+        }
+      };
+
     let url = props.baseURL + 'list/add';
 
     const newList = (event) => {
@@ -39,7 +45,7 @@ const CreateList = (props) => {
     }, [props.sessionToken]);
 
     return (
-        <Modal isOpen={isOpen}>
+        <Modal isOpen={isOpen} onKeyDown={onKeyDown}>
             <ModalHeader>Create New List</ModalHeader>
             <ModalBody>
                 <Form onSubmit={newList}>

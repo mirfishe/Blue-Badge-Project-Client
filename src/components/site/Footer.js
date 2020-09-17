@@ -5,9 +5,9 @@ import "./Footer.css";
 const Footer = () => {
 
     return (
-        <Row>
-            <Col>Footer</Col>
-        </Row>
+        <div className="footer">
+            Team Wario
+        </div>
     );
 };
 
