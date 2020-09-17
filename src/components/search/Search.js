@@ -9,6 +9,13 @@ const Search = (props) => {
     const [results, setResults] = useState([]);
 
     const [errSearchTerms, setErrSearchTerms] = useState("");
+    const [errForm, setErrForm] = useState("");
+
+    const onKeyDown = (e) => {
+        if (e.key === 'Enter') {
+          {frmSearchGames(e)};
+        }
+      };
 
     const searchGames = () => {
 
@@ -29,12 +36,15 @@ const Search = (props) => {
             })
             .then(res => res.json()) // {console.log("Search.js response", res); res.json();}
             .then(json => setResults(json)) // {setResults(json); console.log("Search.js results", json);})
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+                setErrForm(err);
+            })
 
     };
 
-    const frmSearchGames = (event) => {
-        event.preventDefault();
+    const frmSearchGames = (e) => {
+        e.preventDefault();
 
         setErrSearchTerms("");
 
@@ -46,8 +56,8 @@ const Search = (props) => {
 
     };
 
-    const newSearch = (event) => {
-        event.preventDefault();
+    const newSearch = (e) => {
+        e.preventDefault();
 
         setResults([]);
         setSearchTerms("");
@@ -56,35 +66,36 @@ const Search = (props) => {
     };
 
     useEffect(() => {
-        console.log("Search.js props.sessionToken", props.sessionToken);
+        // console.log("Search.js props.sessionToken", props.sessionToken);
         // console.log("Search.js localStorage token", localStorage.getItem("token"));
         setResults([]);
         searchGames();
         // setSearchTerms([]);
     }, [props.sessionToken]);
 
-    useEffect(() => {
-        // console.log("Search.js results", results);
-    }, [results]);
+    // useEffect(() => {
+    //     console.log("Search.js results", results);
+    // }, [results]);
 
-    useEffect(() => {
-        console.log("Search.js activeList", props.activeList);
-    }, [props.activeList]);
+    // useEffect(() => {
+    //     console.log("Search.js activeList", props.activeList);
+    // }, [props.activeList]);
 
     return (
         <Container className="m-3">
         <Row className="m-3">
-        <Form onSubmit={frmSearchGames}>
+        {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
+        <Form onSubmit={frmSearchGames} onKeyDown={onKeyDown}>
         <FormGroup>
         <Input type="text" id="searchTerms" placeholder="Search Terms" value={searchTerms} onChange={(e) => {/*console.log(e.target.value); */setSearchTerms(e.target.value);}} />
         {errSearchTerms !== "" ? <Alert color="danger">{errSearchTerms}</Alert> : ""}
         </FormGroup>
-        <Button type="submit" color="primary">Search</Button>
-        <Button type="submit" outline color="secondary" onClick={newSearch}> New Search</Button>
+        <Button type="submit" color="primary" className="mr-2">Search</Button>
+        <Button type="submit" outline color="secondary" className="mr-2" onClick={newSearch}> Clear Results</Button>
         </Form>
         </Row>
         <Row>
-            {results.length > 0 ? results.map(game => <Results game={game.game} baseURL={props.baseURL} activeList={props.activeList} sessionToken={props.sessionToken} />) : ""}
+            {results.length > 0 ? results.map(game => <Results game={game.game} baseURL={props.baseURL} activeList={props.activeList}  setListItemsUpdated={props.setListItemsUpdated} sessionToken={props.sessionToken} />) : ""}
         </Row>
         </Container>
     );

@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from "react";
-import {Container, Col, Row, Nav, NavItem, NavLink, TabContent, TabPane, Button} from "reactstrap";
+import {Container, Col, Row, Alert, Button, Nav, NavItem, NavLink, TabContent, TabPane} from "reactstrap";
 import "./List.css";
 import classnames from "classnames";
 import ListItems from "./ListItems";
 import CreateList from "./CreateList";
 import EditList from "./EditList";
 import DeleteList from "./DeleteList";
-import ListID from './ListID'; //Testing purposes
 
 const List = (props) => {
 
     const [activeTab, setActiveTab] = useState(0);
+    const [errForm, setErrForm] = useState("");
     const [addList, setAddList] = useState(false);
     const [editList, setEditList] = useState(false);
     const [deleteList, setDeleteList] = useState(false)
@@ -57,18 +57,18 @@ const List = (props) => {
         getList();
     },[props.sessionToken])
 
-    useEffect(() => {
-      console.log("List.js props.sessionToken", props.sessionToken);
-      // console.log("List.js localStorage token", localStorage.getItem("token"));
-  }, [props.sessionToken]);
+  //   useEffect(() => {
+  //     console.log("List.js props.sessionToken", props.sessionToken);
+  //     // console.log("List.js localStorage token", localStorage.getItem("token"));
+  // }, [props.sessionToken]);
 
-    useEffect(() => {
-        console.log("List.js props.activeList", props.activeList);
-    }, [props.activeList]);
+  //   useEffect(() => {
+  //       console.log("List.js props.activeList", props.activeList);
+  //   }, [props.activeList]);
     
     const getList = () => {
 
-        let url = props.baseURL + "list/";
+      let url = props.baseURL + "list/";
 
       fetch(url, {
         method: "GET",
@@ -84,7 +84,10 @@ const List = (props) => {
           props.setActiveList(json[0].id);
           setActiveTab(0);
         })
-        .catch((err) => console.log(err));
+        .catch(err => {
+          console.log(err);
+          setErrForm(err);
+      })
     };
 
 
@@ -92,6 +95,7 @@ const List = (props) => {
 
     return (
         <div>
+          {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
             <Nav tabs>
                 {lists.length > 0 ? lists.map((lists, index) => {
                     return(
@@ -123,9 +127,10 @@ const List = (props) => {
         {/* <ListID baseURL={props.baseURL} sessionToken={props.sessionToken} /> */}
         <TabContent>
         <TabPane>
-          {lists.length > 0 ? <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} /> : ""}
+          {lists.length > 0 ? <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} listItemsUpdated={props.listItemsUpdated} setListItemsUpdated={props.setListItemsUpdated} /> : ""}
         </TabPane>
-        </TabContent> 
+        </TabContent>
+
         </div>
     );
 };
