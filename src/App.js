@@ -76,7 +76,18 @@ function App() {
       <Search baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} setListItemsUpdated={setListItemsUpdated} />
       </Col>
       <Col md="6">
-      {sessionToken !== null && sessionToken !== undefined ? <List baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} setActiveList={setActiveList} listItemsUpdated={listItemsUpdated} setListItemsUpdated={setListItemsUpdated} /> : ""}
+      {sessionToken !== null && sessionToken !== undefined ? <List baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} setActiveList={setActiveList} listItemsUpdated={listItemsUpdated} setListItemsUpdated={setListItemsUpdated} /> : 
+        <><img className="emptyState" src="https://www.onlineverdan.com/wp-content/plugins/ajax-login-and-registration-modal-popup/assets/img/login.svg" alt="login to see lists"/>
+        <p className="emptyState">Login to see your lists here.</p>
+        </>
+        }
+      </Col>
+      </Row>
+      </Container>
+      <Container>
+      <Row>
+      <Col>
+      NEED TO ADD SPACE HERE FOR THE FOOTER
       </Col>
       </Row>
       </Container>

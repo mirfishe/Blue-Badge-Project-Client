@@ -6,6 +6,9 @@ import Results from "./Results";
 const Search = (props) => {
 
     const [searchTerms, setSearchTerms] = useState("");
+    const [pageNumber, setPageNumber,] = useState(0);
+    const [limit, setLimit] = useState(10);
+    const [offset, setOffset] = useState(0);
     const [results, setResults] = useState([]);
 
     const [errSearchTerms, setErrSearchTerms] = useState("");
@@ -19,11 +22,13 @@ const Search = (props) => {
 
     const searchGames = () => {
 
-            let URL = props.baseURL + "igdb";
+            let URL = props.baseURL + "search";
             // console.log("Search.js URL", URL);
 
             let searchCriteriaObject = {
-                searchTerms:  searchTerms.trim()
+                searchTerms:  searchTerms.trim(),
+                limit:  limit,
+                offset: offset
             };
             // console.log("Search.js userObject", searchCriteriaObject);
 
@@ -34,8 +39,23 @@ const Search = (props) => {
                 }),
                 body: JSON.stringify({searchCriteria: searchCriteriaObject})
             })
-            .then(res => res.json()) // {console.log("Search.js response", res); res.json();}
-            .then(json => setResults(json)) // {setResults(json); console.log("Search.js results", json);})
+            .then(res => {
+
+                // console.log("Search.js response", res);
+                // console.log("Search.js response.status", res.status);
+                // console.log("Search.js response.statusText", res.statusText);
+
+                if (res.status === 200) {
+                    return res.json();
+                } else {
+                    return res.status;
+                };
+
+            })
+            .then(json => {
+                // console.log("Search.js results", json);
+                setResults(json);
+            })
             .catch(err => {
                 console.log(err);
                 setErrForm(err);
@@ -48,16 +68,15 @@ const Search = (props) => {
 
         setErrSearchTerms("");
 
-        if (searchTerms.length > 0) {
+        if (searchTerms.trim().length > 0) {
             searchGames();
         } else {
-            setErrSearchTerms("Please enter a search.");
+            setErrSearchTerms("Please enter search.");
         };
 
     };
 
-    const newSearch = (e) => {
-        e.preventDefault();
+    const newSearch = () => {
 
         setResults([]);
         setSearchTerms("");
@@ -65,11 +84,40 @@ const Search = (props) => {
 
     };
 
+    const changePageNumber = (direction) => {
+        if (direction === 'down') {
+          if (pageNumber > 0) {
+            setPageNumber(pageNumber - 1);
+          };
+        };
+        if (direction === 'up') {
+          setPageNumber(pageNumber + 1);
+        };
+    };
+
+      useEffect(() => {
+        // console.log("Search.js pageNumber", pageNumber);
+        setOffset(pageNumber * limit);
+    }, [pageNumber]);
+
+    useEffect(() => {
+        // console.log("Search.js offset", offset);
+
+        if (searchTerms.trim().length > 0) {
+            searchGames();
+            // Moves the page to the top
+            window.scrollTo(0, 0);
+        };
+
+    }, [offset]);
+
     useEffect(() => {
         // console.log("Search.js props.sessionToken", props.sessionToken);
         // console.log("Search.js localStorage token", localStorage.getItem("token"));
-        setResults([]);
-        searchGames();
+        if (props.sessionToken !== null && props.sessionToken !== undefined && searchTerms.trim().length > 0) {
+            setResults([]);
+            searchGames();
+        };
         // setSearchTerms([]);
     }, [props.sessionToken]);
 
@@ -82,21 +130,33 @@ const Search = (props) => {
     // }, [props.activeList]);
 
     return (
-        <Container className="m-3">
-        <Row className="m-3">
+        <Container>
+        <Row>
+        <Col>
         {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
         <Form onSubmit={frmSearchGames} onKeyDown={onKeyDown}>
         <FormGroup>
-        <Input type="text" id="searchTerms" placeholder="Search Terms" value={searchTerms} onChange={(e) => {/*console.log(e.target.value); */setSearchTerms(e.target.value);}} />
         {errSearchTerms !== "" ? <Alert color="danger">{errSearchTerms}</Alert> : ""}
+        <Input type="text" id="searchTerms" placeholder="Search Terms" value={searchTerms} onChange={(e) => {/*console.log(e.target.value); */setSearchTerms(e.target.value);}} />
         </FormGroup>
         <Button type="submit" color="primary" className="mr-2">Search</Button>
-        <Button type="submit" outline color="secondary" className="mr-2" onClick={newSearch}> Clear Results</Button>
+        <Button outline color="secondary" className="mr-2" onClick={newSearch}>Clear Results</Button>
         </Form>
+        </Col>
         </Row>
         <Row>
             {results.length > 0 ? results.map(game => <Results game={game.game} baseURL={props.baseURL} activeList={props.activeList}  setListItemsUpdated={props.setListItemsUpdated} sessionToken={props.sessionToken} />) : ""}
         </Row>
+        {results.length > 0 ? 
+        <Row>
+            <Col xs="2" className="col-auto mr-auto">
+            {pageNumber > 0 ? <Button color="info" onClick={(e) => {/*console.log(e.target.value); */ changePageNumber("down");}}>Previous</Button> : ""}
+            </Col>
+            <Col xs="2" className="col-auto">
+                <Button color="info" onClick={(e) => {/*console.log(e.target.value); */ changePageNumber("up");}}>Next</Button>
+            </Col>
+        </Row>
+        : ""}
         </Container>
     );
 };

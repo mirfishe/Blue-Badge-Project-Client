@@ -30,9 +30,10 @@ const CreateList = (props) => {
         })
         .then((res) => {
             props.getList();
-            addOff();
-            // console.log(res);
         })
+        .then(
+            addOff()
+        )
         .catch(err => {
             console.log(err);
             setErrForm(err);

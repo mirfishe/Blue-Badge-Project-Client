@@ -40,3 +40,17 @@
 .row {
   padding-top: 20px;
 }
+
+.emptyState {
+  max-height: 350px;
+  display: block;
+  margin: auto;
+  text-align: center;
+  color: white;
+  margin-top: 1em;
+}
+
+body{
+  background-color: rgb(73, 73, 73);
+  height: 120vh;
+}

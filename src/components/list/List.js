@@ -48,7 +48,7 @@ const List = (props) => {
   //   useEffect(() => {
   //       console.log("List.js props.activeList", props.activeList);
   //   }, [props.activeList]);
-    
+
     const getList = () => {
 
       let url = props.baseURL + "list/";
@@ -64,7 +64,9 @@ const List = (props) => {
         .then((json) => {
           // console.log("getList json", json);
           setLists(json);
-          props.setActiveList(json[0].id);
+          if (!addList) {
+            props.setActiveList(json[0].id);
+          }
         })
         .catch(err => {
           console.log(err);
