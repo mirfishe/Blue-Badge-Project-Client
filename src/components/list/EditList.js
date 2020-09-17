@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {Alert, Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody} from 'reactstrap';
 
 const EditList = (props) => {
-    const [editListName, setEditListName] = useState(props.listToEdit.listName);
+    const [editListName, setEditListName] = useState("");
     const [errForm, setErrForm] = useState("");
     const [isOpen, setIsOpen] = useState(true);
 
