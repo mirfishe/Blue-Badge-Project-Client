@@ -45,9 +45,9 @@ const List = (props) => {
       getList();
   }, [props.sessionToken]);
 
-  //   useEffect(() => {
-  //       console.log("List.js props.activeList", props.activeList);
-  //   }, [props.activeList]);
+    // useEffect(() => {
+    //     console.log("List.js props.activeList", props.activeList);
+    // }, [props.activeList]);
 
     const getList = () => {
 
@@ -62,9 +62,9 @@ const List = (props) => {
       })
         .then((res) => res.json())
         .then((json) => {
-          // console.log("getList json", json);
+          //console.log("getList json", json);
           setLists(json);
-          if (!addList && lists.length > 0) {
+          if (!addList && json.length > 0) {
             props.setActiveList(json[0].id);
           }
         })
