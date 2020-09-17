@@ -49,3 +49,8 @@
   color: #6c757d;
   margin-top: 1em;
 }
+
+body{
+  background-color: rgb(58, 58, 58);
+  height: 120vh;
+}
