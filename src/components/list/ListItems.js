@@ -31,6 +31,17 @@ const ListItems = (props) => {
         })
       };
 
+      const deleteListItem = (item) => {
+        fetch(`${props.baseURL}item/delete/${item.id}`, {
+          method: 'DELETE',
+          headers: new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': props.sessionToken
+          })
+        })
+        .then(() => getListItems())
+      }
+
       const itemMapper = () => {
         return listItems.map((item, index) => {
           return(
@@ -67,8 +78,13 @@ const ListItems = (props) => {
           return(
             <tr key={index}>
               <td>{item.itemName}</td>
+              <td>{item.itemURL}</td>
+              <td>{item.imageURL}</td>
               <td><a href={item.itemURL} target="_blank">{item.itemName}</a></td>
               <td><img src={item.imageURL} alt={item.itemName}/></td>
+              <td>
+              <Button color="danger" onClick={() => {deleteListItem(item)}}>Delete</Button>
+              </td>
             </tr>
           )
         }) : ""}
