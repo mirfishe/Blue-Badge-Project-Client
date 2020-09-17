@@ -10,7 +10,7 @@ const Logout = (props) => {
 
     return (
         <div className="m-2">
-            <Button color="info" size="sm" onClick={() => props.setSessionToken(undefined)}>Log Out</Button>
+            <Button color="info" onClick={() => props.setSessionToken(undefined)}>Log Out</Button>
         </div>
     );
 };

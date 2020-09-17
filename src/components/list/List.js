@@ -6,7 +6,6 @@ import ListItems from "./ListItems";
 import CreateList from "./CreateList";
 import EditList from "./EditList";
 import DeleteList from "./DeleteList";
-import ListID from './ListID'; //Testing purposes
 
 const List = (props) => {
 
@@ -52,6 +51,19 @@ const List = (props) => {
     const updateListToDelete = (list) => {
         setListToDelete(list);
     }
+
+    useEffect(() => {
+        getList();
+    },[props.sessionToken])
+
+    useEffect(() => {
+      console.log("List.js props.sessionToken", props.sessionToken);
+      // console.log("List.js localStorage token", localStorage.getItem("token"));
+  }, [props.sessionToken]);
+
+    useEffect(() => {
+        console.log("List.js props.activeList", props.activeList);
+    }, [props.activeList]);
     
     const getList = () => {
 
@@ -74,18 +86,7 @@ const List = (props) => {
         .catch((err) => console.log(err));
     };
 
-    useEffect(() => {
-        getList();
-    },[props.sessionToken])
 
-    useEffect(() => {
-      console.log("List.js props.sessionToken", props.sessionToken);
-      // console.log("List.js localStorage token", localStorage.getItem("token"));
-  }, [props.sessionToken]);
-
-    useEffect(() => {
-        console.log("List.js props.activeList", props.activeList);
-    }, [props.activeList]);
     
 
     return (
@@ -100,12 +101,12 @@ const List = (props) => {
                     </NavItem>
                     )}) : ''}
             <NavItem>
-            <NavLink onClick={() => { addOn(); }}>
-                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL} getList={getList}/>: <Button color="primary" size="sm">Add List</Button>}
+            <NavLink className="addList" onClick={() => { addOn(); }}>
+                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL} getList={getList}/> : "Add List"}
                 </NavLink>
             </NavItem>
         </Nav>
-        <TabContent activeTab={activeTab}>
+        {/* <TabContent activeTab={activeTab}>
         <TabPane tabId={0}>
             Testing 1
         <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
@@ -117,9 +118,14 @@ const List = (props) => {
             Testing 3
         <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
         </TabPane>
+      </TabContent> */}
         {/* <ListID baseURL={props.baseURL} sessionToken={props.sessionToken} /> */}
-      </TabContent>
-      <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} />
+        <TabContent>
+        <TabPane>
+          {lists.length > 0 ? <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} /> : ""}
+        </TabPane>
+        </TabContent>
+
         </div>
     );
 };
