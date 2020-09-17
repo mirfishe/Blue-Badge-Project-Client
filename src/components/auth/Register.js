@@ -138,7 +138,7 @@ const Register = (props) => {
 
     return (
         <div className="m-2">
-        <Button color="secondary" size="sm" onClick={toggle}>Register</Button>
+        <Button color="secondary" onClick={toggle}>Register</Button>
         <Modal isOpen={modal} toggle={toggle} >
         <ModalHeader>Register</ModalHeader>
         <ModalBody>

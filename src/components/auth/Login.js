@@ -138,7 +138,7 @@ const Login = (props) => {
 
     return (
         <div className="m-2">
-        <Button color="success" size="sm" onClick={toggle}>Log In</Button>
+        <Button color="success"  onClick={toggle}>Log In</Button>
         <Modal isOpen={modal} toggle={toggle} onKeyDown={onKeyDown}>
         <ModalHeader>Log In</ModalHeader>
         <ModalBody>
