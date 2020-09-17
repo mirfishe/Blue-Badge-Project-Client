@@ -35,15 +35,16 @@ const ListItems = (props) => {
         fetch(`${props.baseURL}item/delete/${item.id}`, {
           method: 'DELETE',
           headers: new Headers({
-            'Content-Type': 'application/json',
-            'Authorization': props.sessionToken
+            "Content-Type": "application/json",
+            "Authorization": props.sessionToken,
           })
+        })
         .then(() => getListItems())
         .catch(err => {
           console.log(err);
           setErrForm(err);
-      })
-      };
+        })
+    };
 
     useEffect(() => {
         // console.log("ListItems.js props.sessionToken", props.sessionToken);
@@ -52,12 +53,12 @@ const ListItems = (props) => {
     }, [props.sessionToken]);
 
     useEffect(() => {
-      // console.log("ListItems.js props.activeList", props.activeList);
+      console.log("ListItems.js props.activeList", props.activeList);
       getListItems();
   }, [props.activeList]);
 
     useEffect(() => {
-      // console.log("ListItems.js props.listItemsUpdated", props.listItemsUpdated);
+      console.log("ListItems.js props.listItemsUpdated", props.listItemsUpdated);
       getListItems();
       props.setListItemsUpdated(false);
   }, [props.listItemsUpdated]);
@@ -72,8 +73,6 @@ const ListItems = (props) => {
               <td><a href={item.itemURL} target="_blank">{item.itemName}</a></td>
               <td>
               <Button color="danger" size="sm" onClick={() => {deleteListItem(item)}}>Delete</Button>
-              <td>
-              <Button color="danger" onClick={() => {deleteListItem(item)}}>Delete</Button>
               </td>
             </tr>
           )
