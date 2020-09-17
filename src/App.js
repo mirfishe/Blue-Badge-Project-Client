@@ -49,17 +49,10 @@ function App() {
   // };
 
   return (
-    <Container>
+    <div>
+      <Header baseURL={baseURL} sessionToken={sessionToken} setSessionToken={setSessionToken} />
+<Container>
       <Row>
-      <Header baseURL={baseURL} sessionToken={sessionToken} setSessionToken={setSessionToken} /* updateToken={updateToken} clearToken={clearToken} */ />
-        {/* <Nav>
-            <NavbarBrand>Logo</NavbarBrand>
-            {localStorage.getItem("token") === null || localStorage.getItem("token") === undefined  ? <Login baseURL={baseURL} updateToken={updateToken} />  : ""}
-            {localStorage.getItem("token") === null || localStorage.getItem("token") === undefined  ? <Register baseURL={baseURL} updateToken={updateToken} /> : ""}
-            {localStorage.getItem("token") !== null && localStorage.getItem("token") !== undefined  ? <Logout clearToken={clearToken} />  : ""}
-        </Nav> */}
-      </Row>
-      <Row className="mp-3">
       <Col md="6">
       <Search baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} />
       </Col>
@@ -67,10 +60,9 @@ function App() {
       {sessionToken !== null && sessionToken !== undefined ? <List baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} setActiveList={setActiveList} /> : ""}
       </Col>
       </Row>
-      <Row>
+      </Container>
       <Footer />
-      </Row>
-    </Container>
+    </div>
   );
 };
 

@@ -14,6 +14,12 @@ const EditList = (props) => {
         editOff();
     }
 
+    const onKeyDown = (e) => {
+        if (e.key === 'Enter') {
+          {updateList(e)};
+        }
+      };
+
     let url = `props.baseURL/list/update/${props.listToEdit.id}`;
 
     const updateList = (event) => {
@@ -39,7 +45,7 @@ const EditList = (props) => {
     }, [props.sessionToken]);
     
     return (
-        <Modal isOpen={isOpen}>
+        <Modal isOpen={isOpen} onKeyDown={onKeyDown}>
             <ModalHeader>Edit List</ModalHeader>
             <ModalBody>
                 <Form onSubmit={updateList}>

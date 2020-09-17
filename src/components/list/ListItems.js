@@ -40,10 +40,6 @@ const ListItems = (props) => {
         })
       }
 
-      useEffect(() => {
-          getListItems()
-      }, [])
-
     useEffect(() => {
         console.log("ListItems.js props.sessionToken", props.sessionToken);
         // console.log("ListItems.js localStorage token", localStorage.getItem("token"));
