@@ -69,8 +69,8 @@ const ListItems = (props) => {
            {listItems.length > 0 ? listItems.map((item, index) => {
             return(
               <Card body className="text-center" id="listItems">
+              <CardText>{item.imageURL ? <img src={item.imageURL} alt={item.itemName}/> : <img className="altImage" src={altImgURL} />}</CardText>
                 <CardText>{item ? <a href={item.itemURL} target="_blank">{item.itemName}</a> : <p>{item.itemName}</p>} </CardText>
-                <CardText>{item.imageURL ? <img src={item.imageURL} alt={item.itemName}/> : <img className="altImage" src={altImgURL} />}</CardText>
                 <Button color="danger" size="sm"  onClick={() => {deleteListItem(item)}}>Delete</Button>
               </Card>
             )
