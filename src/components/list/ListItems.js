@@ -43,13 +43,14 @@ const ListItems = (props) => {
           console.log(err);
           setErrForm(err);
       })
-      };
+      })};
 
-    useEffect(() => {
-        // console.log("ListItems.js props.sessionToken", props.sessionToken);
-        // console.log("ListItems.js localStorage token", localStorage.getItem("token"));
-        getListItems();
-    }, [props.sessionToken]);
+      // Commented out by Nick B. because it seems to cause a bug where list items disappear on initial login, after initial render
+    // useEffect(() => {
+    //     // console.log("ListItems.js props.sessionToken", props.sessionToken);
+    //     // console.log("ListItems.js localStorage token", localStorage.getItem("token"));
+    //     getListItems();
+    // }, [props.sessionToken]);
 
     useEffect(() => {
       // console.log("ListItems.js props.activeList", props.activeList);
@@ -72,8 +73,6 @@ const ListItems = (props) => {
               <td><a href={item.itemURL} target="_blank">{item.itemName}</a></td>
               <td>
               <Button color="danger" size="sm" onClick={() => {deleteListItem(item)}}>Delete</Button>
-              <td>
-              <Button color="danger" onClick={() => {deleteListItem(item)}}>Delete</Button>
               </td>
             </tr>
           )
