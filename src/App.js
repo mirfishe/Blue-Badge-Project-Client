@@ -18,6 +18,7 @@ function App() {
 
   const [sessionToken, setSessionToken] = useState(undefined);
   const [activeList, setActiveList] = useState(0);
+  const [listItemsUpdated, setListItemsUpdated] = useState(false);
 
   // useEffect(() => {
   //   if (localStorage.getItem("token")) {
@@ -28,9 +29,11 @@ function App() {
   //   };
   // }, []);
 
-  // useEffect(() => {
-  //     console.log("App.js sessionToken", sessionToken); // Never shows the current value of sessionToken
-  // }, [sessionToken]);
+  useEffect(() => {
+      // console.log("App.js sessionToken", sessionToken); // Never shows the current value of sessionToken
+      setActiveList(0);
+      setListItemsUpdated(false);
+  }, [sessionToken]);
 
   // const updateToken = (newToken) => {
   //   localStorage.setItem("token", newToken);
@@ -54,10 +57,10 @@ function App() {
 <Container>
       <Row>
       <Col md="6">
-      <Search baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} />
+      <Search baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} setListItemsUpdated={setListItemsUpdated} />
       </Col>
       <Col md="6">
-      {sessionToken !== null && sessionToken !== undefined ? <List baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} setActiveList={setActiveList} /> : ""}
+      {sessionToken !== null && sessionToken !== undefined ? <List baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} setActiveList={setActiveList} listItemsUpdated={listItemsUpdated} setListItemsUpdated={setListItemsUpdated} /> : ""}
       </Col>
       </Row>
       </Container>

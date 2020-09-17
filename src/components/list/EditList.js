@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
-import {Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody} from 'reactstrap';
+import {Alert, Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody} from 'reactstrap';
 
 const EditList = (props) => {
     const [editListName, setEditListName] = useState(props.listToEdit.listName);
+    const [errForm, setErrForm] = useState("");
     const [isOpen, setIsOpen] = useState(true);
 
     const editOff = () => {
@@ -37,17 +38,22 @@ const EditList = (props) => {
             editOff();
             console.log(res);
         })
+        .catch(err => {
+            console.log(err);
+            setErrForm(err);
+        })
     }
 
-    useEffect(() => {
-        console.log("DeleteList.js props.sessionToken", props.sessionToken);
-        // console.log("DeleteList.js localStorage token", localStorage.getItem("token"));
-    }, [props.sessionToken]);
+    // useEffect(() => {
+    //     console.log("DeleteList.js props.sessionToken", props.sessionToken);
+    //     // console.log("DeleteList.js localStorage token", localStorage.getItem("token"));
+    // }, [props.sessionToken]);
     
     return (
         <Modal isOpen={isOpen} onKeyDown={onKeyDown}>
             <ModalHeader>Edit List</ModalHeader>
             <ModalBody>
+                {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
                 <Form onSubmit={updateList}>
                     <FormGroup>
                         <Label htmlFor="name">List Name:</Label>

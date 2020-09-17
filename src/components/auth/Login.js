@@ -33,8 +33,8 @@ const Login = (props) => {
         }
       };
 
-    const logIn = (event) => {
-        event.preventDefault();
+    const logIn = (e) => {
+        e.preventDefault();
 
         setErrForm("");
 
@@ -102,9 +102,9 @@ const Login = (props) => {
             })
             .then(res => {
 
-                console.log("Login.js response", res);
-                console.log("Login.js response.status", res.status);
-                console.log("Login.js response.statusText", res.statusText);
+                // console.log("Login.js response", res);
+                // console.log("Login.js response.status", res.status);
+                // console.log("Login.js response.statusText", res.statusText);
 
                 if (res.status === 200) {
                     return res.json();
@@ -117,24 +117,27 @@ const Login = (props) => {
 
                 if (json !== 500 && json !== 401) {
                     props.setSessionToken(json.sessionToken);
-                    console.log("Login.js USER", json);
-                    console.log("Login.js json.sessionToken", json.sessionToken);
+                    // console.log("Login.js user", json);
+                    // console.log("Login.js json.sessionToken", json.sessionToken);
                     toggle();
                 } else {
-                    console.log("Login.js ERROR", json);
+                    // console.log("Login.js error", json);
                     setErrForm("Login failed.");
                 };
 
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+                setErrForm(err);
+            })
 
         };
     };
 
-    useEffect(() => {
-        console.log("Login.js props.sessionToken", props.sessionToken);
-        // console.log("Login.js localStorage token", localStorage.getItem("token"));
-    }, [props.sessionToken]);
+    // useEffect(() => {
+    //     console.log("Login.js props.sessionToken", props.sessionToken);
+    //     // console.log("Login.js localStorage token", localStorage.getItem("token"));
+    // }, [props.sessionToken]);
 
     return (
         <div className="m-2">
