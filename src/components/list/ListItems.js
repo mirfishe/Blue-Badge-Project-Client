@@ -76,7 +76,11 @@ const ListItems = (props) => {
               </td>
             </tr>
           )
-        }) : ""}
+        }) : 
+        <><img className="emptyItems" src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg" alt="Add Games"/>
+           <p className="emptyItems">Add Games to your List to see them here.</p>
+           </>
+        }
         </Table>
         
     );
