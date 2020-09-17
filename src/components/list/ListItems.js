@@ -38,21 +38,12 @@ const ListItems = (props) => {
             'Content-Type': 'application/json',
             'Authorization': props.sessionToken
           })
-        })
         .then(() => getListItems())
-      }
-
-      const itemMapper = () => {
-        return listItems.map((item, index) => {
-          return(
-            <tr key={index}>
-              <td>{item.itemName}</td>
-              <td>{item.itemURL}</td>
-              <td>{item.imageURL}</td>
-            </tr>
-          )
-        })
-      }
+        .catch(err => {
+          console.log(err);
+          setErrForm(err);
+      })
+      };
 
     useEffect(() => {
         // console.log("ListItems.js props.sessionToken", props.sessionToken);
@@ -77,11 +68,10 @@ const ListItems = (props) => {
          {listItems.length > 0 ? listItems.map((item, index) => {
           return(
             <tr key={index}>
-              <td>{item.itemName}</td>
-              <td>{item.itemURL}</td>
-              <td>{item.imageURL}</td>
-              <td><a href={item.itemURL} target="_blank">{item.itemName}</a></td>
               <td><img src={item.imageURL} alt={item.itemName}/></td>
+              <td><a href={item.itemURL} target="_blank">{item.itemName}</a></td>
+              <td>
+              <Button color="danger" size="sm" onClick={() => {deleteListItem(item)}}>Delete</Button>
               <td>
               <Button color="danger" onClick={() => {deleteListItem(item)}}>Delete</Button>
               </td>
@@ -92,6 +82,5 @@ const ListItems = (props) => {
         
     );
 };
-// notes 
 
 export default ListItems;
