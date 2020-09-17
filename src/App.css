@@ -46,11 +46,11 @@
   display: block;
   margin: auto;
   text-align: center;
-  color: #6c757d;
+  color: white;
   margin-top: 1em;
 }
 
 body{
-  background-color: rgb(58, 58, 58);
+  background-color: rgb(73, 73, 73);
   height: 120vh;
 }
