@@ -13,10 +13,13 @@ const Results = (props) => {
         let URL = props.baseURL + "item/add/" + props.activeList;
         // console.log("Results.js URL", URL);
 
+        let coverURL = "";
+        game.cover ? coverURL = game.cover.url : coverURL = "";
+
         let listItemObject = {
             itemName: game.name,
             itemURL: game.url,
-            imageURL: game.cover.url,
+            imageURL: coverURL,
             sortID: 0
         };
         // console.log("Results.js listItemObject", listItemObject);

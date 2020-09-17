@@ -31,8 +31,14 @@ function App() {
 
   useEffect(() => {
       // console.log("App.js sessionToken", sessionToken); // Never shows the current value of sessionToken
-      setActiveList(0);
-      setListItemsUpdated(false);
+
+      if (sessionToken === null || sessionToken === undefined ) {
+        setActiveList(0);
+        setListItemsUpdated(false);
+      } else {
+        setListItemsUpdated(true);
+      };
+
   }, [sessionToken]);
 
   // const updateToken = (newToken) => {

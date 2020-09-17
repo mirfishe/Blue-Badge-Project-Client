@@ -54,13 +54,10 @@ const List = (props) => {
     }
 
     useEffect(() => {
-        getList();
-    },[props.sessionToken])
-
-  //   useEffect(() => {
-  //     console.log("List.js props.sessionToken", props.sessionToken);
-  //     // console.log("List.js localStorage token", localStorage.getItem("token"));
-  // }, [props.sessionToken]);
+      // console.log("List.js props.sessionToken", props.sessionToken);
+      // console.log("List.js localStorage token", localStorage.getItem("token"));
+      getList();
+  }, [props.sessionToken]);
 
   //   useEffect(() => {
   //       console.log("List.js props.activeList", props.activeList);
