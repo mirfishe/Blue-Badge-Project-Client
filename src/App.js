@@ -80,6 +80,13 @@ function App() {
       </Col>
       </Row>
       </Container>
+      <Container>
+      <Row>
+      <Col>
+      NEED TO ADD SPACE HERE FOR THE FOOTER
+      </Col>
+      </Row>
+      </Container>
       <Footer />
     </div>
   );
