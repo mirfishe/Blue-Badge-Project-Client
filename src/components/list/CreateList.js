@@ -29,7 +29,7 @@ const CreateList = (props) => {
             })
         })
         .then((res) => {
-            props.getList();
+            props.reGetList();
         })
         .then(
             addOff()
