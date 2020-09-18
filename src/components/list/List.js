@@ -111,7 +111,7 @@ const List = (props) => {
                     )}) : ''}
             <NavItem>
             <NavLink className="addList" onClick={() => { addOn(); }}>
-                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL} getList={getList}/> : null}<img src="https://pngimage.net/wp-content/uploads/2018/05/add-button-png-5.png" alt="New List" width="30" height="30"/>
+                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL} reGetList={reGetList}/> : null}<img src="https://pngimage.net/wp-content/uploads/2018/05/add-button-png-5.png" alt="New List" width="30" height="30"/>
 
                 </NavLink>
             </NavItem>
