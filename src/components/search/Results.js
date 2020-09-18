@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Container, Col, Row, Alert, Button, Card, CardBody, CardText, CardTitle} from 'reactstrap';
+import {Container, Col, Row, Alert, Button, Card, CardBody, CardText, CardTitle, Modal, ModalHeader, ModalFooter} from 'reactstrap';
 import "./Results.css";
 
 const Results = (props) => {
@@ -42,6 +42,7 @@ const Results = (props) => {
         })
 
     };
+    const altImgURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/No_image_available_600_x_450.svg/1280px-No_image_available_600_x_450.svg.png";
 
     // useEffect(() => {
     //     console.log("Results.js props.sessionToken", props.sessionToken);
@@ -53,22 +54,22 @@ const Results = (props) => {
     // }, [props.activeList]);
 
     return (
-        <Col>
+        <Row>
         {props.game ?
-            <Card id={props.game.id}>
-                    <div class="resultsBorder">
-                <CardBody>
-                {props.game.cover ? <img src={props.game.cover.url} alt={props.game.name} /> : ""}
-                {props.game ? <CardTitle><a href={props.game.url} target="_blank">{props.game.name}</a></CardTitle> : <CardTitle>{props.game.name}</CardTitle>}
-                {/* {props.game.summary ? <CardText>{props.game.summary}</CardText> : ''} */}
-                {props.sessionToken !== null && props.sessionToken !== undefined ? <Button color="success" onClick={() => {/*console.log("Results.js Button click props.game", props.game); */ addListItem(props.game);}}>Add</Button> : ''}
-                {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
-                </CardBody>
-                </div>
-            </Card>
+                <Card body className="text-center" id={props.game.id}>
+                        <div class="resultsBorder">
+                    <CardBody>
+                    {props.game.cover ? <img src={props.game.cover.url} alt={props.game.name} /> : <img className="altImage" src={altImgURL} />}
+                    {props.game ? <CardTitle><a href={props.game.url} target="_blank">{props.game.name}</a></CardTitle> : <CardTitle>{props.game.name}</CardTitle>}
+                    {/* {props.game.summary ? <CardText>{props.game.summary}</CardText> : ''} */}
+                    {props.sessionToken !== null && props.sessionToken !== undefined ? <Button color="success" onClick={() => {/*console.log("Results.js Button click props.game", props.game); */ addListItem(props.game);}}>Add</Button> : ''}
+                    {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
+                    </CardBody>
+                    </div>
+                </Card>
         : ""
         }
-        </Col>
+        </Row>
     );
 };
 
