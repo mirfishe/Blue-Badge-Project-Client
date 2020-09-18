@@ -34,7 +34,7 @@ const EditList = (props) => {
             })
         })
         .then((res) => {
-            props.getList();
+            props.reGetList();
             editOff();
             // console.log(res);
         })

@@ -65,6 +65,28 @@ const List = (props) => {
       })
     };
 
+    const reGetList = () => {
+
+        let url = props.baseURL + "list/";
+  
+        fetch(url, {
+          method: "GET",
+          headers: new Headers({
+            "Content-Type": "application/json",
+            "Authorization": props.sessionToken
+          }),
+        })
+          .then((res) => res.json())
+          .then((json) => {
+            // console.log("List.js json", json);
+            setLists(json);
+          })
+          .catch(err => {
+            console.log(err);
+            setErrForm(err);
+        })
+      };
+
     useEffect(() => {
       // console.log("List.js props.sessionToken", props.sessionToken);
       // console.log("List.js localStorage token", localStorage.getItem("token"));
@@ -96,7 +118,7 @@ const List = (props) => {
         </Nav>
         {lists.length > 0 ? 
         <Container className="d-flex justify-content-end my-2">
-            <Button className="mr-3" color="primary" size="sm" onClick={() => { editOn(); }}>{(editList) ?<EditList baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} getList={getList} setEditList={setEditList}/> : null}Edit List</Button>
+            <Button className="mr-3" color="primary" size="sm" onClick={() => { editOn(); }}>{(editList) ?<EditList baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} reGetList={reGetList} setEditList={setEditList}/> : null}Edit List</Button>
         {lists.length > 1 ? 
             <Button className="mr-3" color="danger" size="sm" onClick={() => { deleteOn(); }}>{(deleteList) ?<DeleteList baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} getList={getList} setDeleteList={setDeleteList}/> : null}Delete List</Button>
           : ""}
