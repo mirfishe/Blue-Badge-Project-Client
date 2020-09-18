@@ -7,11 +7,6 @@ import Logout from "../auth/Logout";
 
 const Header = (props) => {
 
-    // After login, this component isn't being refreshed
-    // After logout, this component isn't being refreshed
-
-    // const [headerSessionToken, setHeaderSessionToken] = useState(props.sessionToken);
-
     // useEffect(() => {
     //     console.log("Header.js props.sessionToken", props.sessionToken);
     //     // console.log("Header.js localStorage token", localStorage.getItem("token"));
