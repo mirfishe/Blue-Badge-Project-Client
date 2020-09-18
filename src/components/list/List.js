@@ -39,16 +39,6 @@ const List = (props) => {
         setDeleteList(true);
     }
 
-    useEffect(() => {
-      // console.log("List.js props.sessionToken", props.sessionToken);
-      // console.log("List.js localStorage token", localStorage.getItem("token"));
-      getList();
-  }, [props.sessionToken]);
-
-  //   useEffect(() => {
-  //       console.log("List.js props.activeList", props.activeList);
-  //   }, [props.activeList]);
-
     const getList = () => {
 
       let url = props.baseURL + "list/";
@@ -62,17 +52,28 @@ const List = (props) => {
       })
         .then((res) => res.json())
         .then((json) => {
-          // console.log("getList json", json);
+          // console.log("List.js json", json);
           setLists(json);
-          if (!addList) {
+          // console.log("List.js props.activeList before !addList if statement", props.activeList);
+          if (!addList) { // && lists.length > 0 // causes activeList not to be set on login
             props.setActiveList(json[0].id);
-          }
+          };
         })
         .catch(err => {
           console.log(err);
           setErrForm(err);
       })
     };
+
+    useEffect(() => {
+      // console.log("List.js props.sessionToken", props.sessionToken);
+      // console.log("List.js localStorage token", localStorage.getItem("token"));
+      getList();
+  }, [props.sessionToken]);
+
+    useEffect(() => {
+        // console.log("List.js props.activeList", props.activeList);
+    }, [props.activeList]);
 
     return (
         <div className="listStyle">
@@ -81,25 +82,33 @@ const List = (props) => {
                 {lists.length > 0 ? lists.map((lists, index) => {
                     return(
                     <NavItem key={index}>
-                     <NavLink className={classnames({ active: activeTab === index })} index={index} onClick={() => { toggleTab(index); toggleId(lists.id)  }}>
+                     <NavLink id="userList" className={classnames({ active: activeTab === index })} index={index} onClick={() => { toggleTab(index); toggleId(lists.id)  }}>
                          {lists.listName}
                      </NavLink>
                     </NavItem>
                     )}) : ''}
             <NavItem>
             <NavLink className="addList" onClick={() => { addOn(); }}>
-                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL} getList={getList}/> : null}Add List
+                    {(addList) ? <CreateList setAddList={setAddList} sessionToken={props.sessionToken} baseURL={props.baseURL} getList={getList}/> : null}<img src="https://pngimage.net/wp-content/uploads/2018/05/add-button-png-5.png" alt="New List" width="30" height="30"/>
+
                 </NavLink>
             </NavItem>
         </Nav>
+        {lists.length > 0 ? 
         <Container className="d-flex justify-content-end my-2">
             <Button className="mr-3" color="primary" size="sm" onClick={() => { editOn(); }}>{(editList) ?<EditList baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} getList={getList} setEditList={setEditList}/> : null}Edit List</Button>
+        {lists.length > 1 ? 
             <Button className="mr-3" color="danger" size="sm" onClick={() => { deleteOn(); }}>{(deleteList) ?<DeleteList baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} getList={getList} setDeleteList={setDeleteList}/> : null}Delete List</Button>
+          : ""}
         </Container>
-    
+        : ""}
         <TabContent>
         <TabPane>
-          {lists.length > 0 ? <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} listItemsUpdated={props.listItemsUpdated} setListItemsUpdated={props.setListItemsUpdated} /> : ""}
+          {lists.length > 0 ? <ListItems baseURL={props.baseURL} sessionToken={props.sessionToken} activeList={props.activeList} listItemsUpdated={props.listItemsUpdated} setListItemsUpdated={props.setListItemsUpdated} />
+          :
+          <><img className="emptyItems" src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg" alt="Add Games"/>
+          <p className="emptyItems">Create a list to add items.</p>
+          </>}
         </TabPane>
         </TabContent>
         </div>

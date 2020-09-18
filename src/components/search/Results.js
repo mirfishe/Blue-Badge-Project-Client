@@ -19,8 +19,7 @@ const Results = (props) => {
         let listItemObject = {
             itemName: game.name,
             itemURL: game.url,
-            imageURL: coverURL,
-            sortID: 0
+            imageURL: coverURL
         };
         // console.log("Results.js listItemObject", listItemObject);
 
@@ -57,13 +56,15 @@ const Results = (props) => {
         <Col>
         {props.game ?
             <Card id={props.game.id}>
+                    <div class="resultsBorder">
                 <CardBody>
                 {props.game.cover ? <img src={props.game.cover.url} alt={props.game.name} /> : ""}
                 {props.game ? <CardTitle><a href={props.game.url} target="_blank">{props.game.name}</a></CardTitle> : <CardTitle>{props.game.name}</CardTitle>}
-                {props.game.summary ? <CardText>{props.game.summary}</CardText> : ''}
+                {/* {props.game.summary ? <CardText>{props.game.summary}</CardText> : ''} */}
                 {props.sessionToken !== null && props.sessionToken !== undefined ? <Button color="success" onClick={() => {/*console.log("Results.js Button click props.game", props.game); */ addListItem(props.game);}}>Add</Button> : ''}
                 {errForm !== "" ? <Alert color="danger">{errForm}</Alert> : ""}
                 </CardBody>
+                </div>
             </Card>
         : ""
         }

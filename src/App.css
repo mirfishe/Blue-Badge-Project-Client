@@ -52,6 +52,16 @@
 
 body{
   /* background-color: rgb(126, 126, 126); */
+  /* background-color: lightslategray; */
   background-color: white;
   height: 120vh;
+}
+
+/* .cardBack{
+  background-color: #eeeeeec7;
+  padding: 1em;
+} */
+
+.spacing {
+  padding-top: 2em;
 }

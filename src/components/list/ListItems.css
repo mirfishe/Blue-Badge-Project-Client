@@ -2,7 +2,8 @@
     display: inline-block;
     margin: 8px;
     padding: 8px;
-    width: 15em;
+    width: 11em;
+    /* border: 2px rgb(14, 85, 250) solid; */
 }
 
 .altImage{
