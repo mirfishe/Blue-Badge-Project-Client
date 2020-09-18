@@ -55,7 +55,7 @@ const List = (props) => {
           // console.log("List.js json", json);
           setLists(json);
           // console.log("List.js props.activeList before !addList if statement", props.activeList);
-          if (!addList) { // && lists.length > 0
+          if (!addList) { // && lists.length > 0 // causes activeList not to be set on login
             props.setActiveList(json[0].id);
           };
         })

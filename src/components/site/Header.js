@@ -20,7 +20,7 @@ const Header = (props) => {
     return (
         <Navbar className="header">
             <NavbarBrand>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Wario_emblem.svg" width="40" height="40" alt=""/>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Wario_emblem.svg" width="40" height="40" style={{borderRadius: '3px'}} alt=""/>
             </NavbarBrand>
                  <Nav className="headerNav">
                     <NavItem>
