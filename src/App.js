@@ -70,7 +70,7 @@ function App() {
   return (
     <div>
       <Header baseURL={baseURL} sessionToken={sessionToken} setSessionToken={setSessionToken} />
-<Container>
+<Container className="main">
       <Row>
       <Col md="6">
         <div className="cardBack">
