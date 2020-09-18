@@ -4,6 +4,9 @@ import {Container, Col, Row, Alert, Form, Button, FormGroup, Input, Label, Modal
 const Register = (props) => {
 
     const [modal, setModal] = useState(false);
+    const [buttonText, setButtonText] = useState('Show Password')
+    const [showPassword, setShowPassword] = useState('password')
+
     const toggle = () => {
         
         setEmail("");
@@ -15,6 +18,17 @@ const Register = (props) => {
 
         setModal(!modal);
     };
+
+    const togglePassword = (e) => {
+        e.preventDefault();
+        if (showPassword === "password") {
+          setShowPassword("text")
+          setButtonText("Hide Password")
+        } else if (showPassword === "text") {
+          setShowPassword("password")
+          setButtonText("Show Password")
+        }
+    }
 
     // useEffect(() => {
     //     console.log("Register.js modal", modal);
@@ -154,9 +168,11 @@ const Register = (props) => {
             </FormGroup>
             <FormGroup>
                 <Label for="txtPassword">Password</Label>
-                <Input type="password" id="password" placeholder="Password" value={password} onChange={(e) => {/*console.log(e.target.value); */setPassword(e.target.value);}} />
+                <Input type={showPassword} id="password" placeholder="Password" value={password} onChange={(e) => {/*console.log(e.target.value); */setPassword(e.target.value);}} />
                 {errPassword !== "" ? <Alert color="danger">{errPassword}</Alert> : ""}
             </FormGroup>
+            <Button color="info" size="sm" onClick={(e) => {togglePassword(e)}}>
+            {buttonText}</Button>
         </Form>
         </ModalBody>
         <ModalFooter>
