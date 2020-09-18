@@ -73,7 +73,7 @@ function App() {
 <Container>
       <Row>
       <Col md="6">
-        <div class="cardBack">
+        <div className="cardBack">
       <Search baseURL={baseURL} sessionToken={sessionToken} activeList={activeList} setListItemsUpdated={setListItemsUpdated} />
         </div>
       </Col>
