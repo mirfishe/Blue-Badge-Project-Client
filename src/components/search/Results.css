@@ -1,7 +1,9 @@
 .resultsBorder{
     display: inline-block;
-    margin: 10px;
-    padding: 8px;
-    width: 12em;
-    height: 14em;
+    margin: 8px;
+    padding: 6px;
+    max-width: 12em;
+    min-width: 11em;
+    max-height: 15em;
+    min-height: 13em;
 }
